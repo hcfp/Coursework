@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="10"/>
+    <BuildModes Active="Default"/>
+    <Units Count="4">
+      <Unit0>
+        <Filename Value="projectPassgen.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="25"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="unitpassgen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="unitPassgen"/>
+        <TopLine Value="13"/>
+        <CursorPos X="40" Y="32"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="unitwords.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form2"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="unitWords"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="63"/>
+        <CursorPos X="35" Y="90"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="unitrandom.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form3"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="unitRandom"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="157"/>
+        <CursorPos X="50" Y="187"/>
+        <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit3>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="22" Column="24" TopLine="3"/>
+      </Position1>
+      <Position2>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="24" Column="18" TopLine="2"/>
+      </Position2>
+      <Position3>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="138" Column="2" TopLine="106"/>
+      </Position3>
+      <Position4>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="135" Column="12" TopLine="112"/>
+      </Position4>
+      <Position5>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="107" Column="28" TopLine="107"/>
+      </Position5>
+      <Position6>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="108" Column="28" TopLine="108"/>
+      </Position6>
+      <Position7>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="56" Column="81" TopLine="24"/>
+      </Position7>
+      <Position8>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="101" Column="31" TopLine="95"/>
+      </Position8>
+      <Position9>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="102" Column="31" TopLine="96"/>
+      </Position9>
+      <Position10>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="103" Column="31" TopLine="97"/>
+      </Position10>
+      <Position11>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="105" Column="31" TopLine="99"/>
+      </Position11>
+      <Position12>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="104" Column="31" TopLine="104"/>
+      </Position12>
+      <Position13>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="105" Column="31" TopLine="105"/>
+      </Position13>
+      <Position14>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="106" Column="31" TopLine="106"/>
+      </Position14>
+      <Position15>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="107" Column="31" TopLine="107"/>
+      </Position15>
+      <Position16>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="144" Column="27" TopLine="123"/>
+      </Position16>
+      <Position17>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="125" Column="20" TopLine="96"/>
+      </Position17>
+      <Position18>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="115" Column="26" TopLine="99"/>
+      </Position18>
+      <Position19>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="176" Column="35" TopLine="150"/>
+      </Position19>
+      <Position20>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="44" Column="63" TopLine="30"/>
+      </Position20>
+      <Position21>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="167" Column="36" TopLine="150"/>
+      </Position21>
+      <Position22>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="178" Column="43" TopLine="150"/>
+      </Position22>
+      <Position23>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="167" Column="36" TopLine="151"/>
+      </Position23>
+      <Position24>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="79" Column="17" TopLine="63"/>
+      </Position24>
+      <Position25>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="109" Column="17" TopLine="93"/>
+      </Position25>
+      <Position26>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="79" Column="17" TopLine="63"/>
+      </Position26>
+      <Position27>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="109" Column="17" TopLine="93"/>
+      </Position27>
+      <Position28>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="79" Column="17" TopLine="63"/>
+      </Position28>
+      <Position29>
+        <Filename Value="unitrandom.pas"/>
+        <Caret Line="109" Column="17" TopLine="93"/>
+      </Position29>
+      <Position30>
+        <Filename Value="unitwords.pas"/>
+        <Caret Line="25" Column="33" TopLine="25"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectSession>
+</CONFIG>

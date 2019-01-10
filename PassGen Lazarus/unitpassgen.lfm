@@ -1,0 +1,29 @@
+object Form1: TForm1
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 320
+  Caption = 'Form1'
+  ClientHeight = 240
+  ClientWidth = 320
+  Position = poDesktopCenter
+  Visible = False
+  object ButtonWords: TButton
+    Left = 112
+    Height = 25
+    Top = 56
+    Width = 75
+    Caption = 'Words'
+    OnClick = ButtonWordsClick
+    TabOrder = 0
+  end
+  object ButtonRandom: TButton
+    Left = 112
+    Height = 25
+    Top = 128
+    Width = 75
+    Caption = 'Random'
+    OnClick = ButtonRandomClick
+    TabOrder = 1
+  end
+end

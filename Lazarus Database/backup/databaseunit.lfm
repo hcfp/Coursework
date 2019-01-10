@@ -1,0 +1,179 @@
+object Form1: TForm1
+  Left = 0
+  Height = 551
+  Top = 0
+  Width = 1181
+  ActiveControl = EditUsername
+  Caption = 'Form1'
+  ClientHeight = 551
+  ClientWidth = 1181
+  OnCreate = FormCreate
+  Position = poDesktopCenter
+  ShowInTaskBar = stAlways
+  Visible = False
+  object EditUsername: TEdit
+    Left = 66
+    Height = 23
+    Top = 170
+    Width = 128
+    TabOrder = 0
+  end
+  object EditPassword: TEdit
+    Left = 66
+    Height = 23
+    Top = 230
+    Width = 128
+    TabOrder = 1
+  end
+  object Label1: TLabel
+    Left = 104
+    Height = 15
+    Top = 144
+    Width = 53
+    Caption = 'Username'
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 105
+    Height = 15
+    Top = 204
+    Width = 50
+    Caption = 'Password'
+    ParentColor = False
+  end
+  object ButtonSubmit: TButton
+    Left = 93
+    Height = 25
+    Top = 264
+    Width = 75
+    Caption = 'Submit'
+    OnClick = ButtonSubmitClick
+    TabOrder = 2
+  end
+  object grid: TDBGrid
+    Left = 256
+    Height = 240
+    Top = 32
+    Width = 552
+    Color = clWindow
+    Columns = <>
+    DataSource = source
+    TabOrder = 3
+  end
+  object ButtonConnect: TButton
+    Left = 495
+    Height = 25
+    Top = 319
+    Width = 75
+    Caption = 'Connect'
+    OnClick = ButtonConnectClick
+    TabOrder = 4
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 412
+    Height = 25
+    Top = 283
+    Width = 241
+    BevelOuter = bvNone
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 25
+    ClientWidth = 241
+    DataSource = source
+    Options = []
+    TabOrder = 5
+  end
+  object DBEditUsername: TDBEdit
+    Left = 848
+    Height = 23
+    Top = 81
+    Width = 128
+    DataField = 'Username'
+    DataSource = source
+    CharCase = ecNormal
+    MaxLength = 0
+    TabOrder = 6
+  end
+  object DBEditPassword: TDBEdit
+    Left = 848
+    Height = 23
+    Top = 139
+    Width = 128
+    DataField = 'Password'
+    DataSource = source
+    CharCase = ecNormal
+    MaxLength = 0
+    TabOrder = 7
+  end
+  object LabelEditUsername: TLabel
+    Left = 874
+    Height = 15
+    Top = 56
+    Width = 76
+    Caption = 'Edit Username'
+    ParentColor = False
+  end
+  object LabelEditPassword: TLabel
+    Left = 876
+    Height = 15
+    Top = 114
+    Width = 73
+    Caption = 'Edit Password'
+    ParentColor = False
+  end
+  object conn: TSQLite3Connection
+    Connected = False
+    LoginPrompt = False
+    DatabaseName = 'C:\Users\habib\Documents\Everything\School\Computing\Computing-Coursework\Lazarus Database\userpass.db'
+    KeepConnection = False
+    Transaction = trans
+    HostName = 'localhost'
+    left = 48
+    top = 33
+  end
+  object trans: TSQLTransaction
+    Active = False
+    Database = conn
+    left = 168
+    top = 33
+  end
+  object query: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'UserID'
+        DataType = ftAutoInc
+        Precision = -1
+      end    
+      item
+        Name = 'Username'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end    
+      item
+        Name = 'Password'
+        DataType = ftString
+        Precision = -1
+        Size = 50
+      end>
+    AfterDelete = queryAfterDelete
+    AfterPost = queryAfterPost
+    Database = conn
+    Transaction = trans
+    SQL.Strings = (
+      'SELECT * FROM LoginInformation'
+    )
+    Params = <>
+    left = 104
+    top = 33
+  end
+  object source: TDataSource
+    DataSet = query
+    left = 48
+    top = 104
+  end
+end

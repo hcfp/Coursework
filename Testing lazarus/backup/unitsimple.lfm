@@ -1,0 +1,101 @@
+object Form3: TForm3
+  Left = 0
+  Height = 278
+  Top = 0
+  Width = 347
+  ActiveControl = EditPassword
+  Caption = 'Form3'
+  ClientHeight = 278
+  ClientWidth = 347
+  Position = poDesktopCenter
+  LCLVersion = '1.8.4.0'
+  Visible = False
+  object EditPassword: TLabeledEdit
+    Left = 56
+    Height = 23
+    Top = 48
+    Width = 207
+    EditLabel.AnchorSideLeft.Control = EditPassword
+    EditLabel.AnchorSideRight.Control = EditPassword
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = EditPassword
+    EditLabel.Left = 56
+    EditLabel.Height = 15
+    EditLabel.Top = 30
+    EditLabel.Width = 207
+    EditLabel.Caption = 'Enter password to be tested'
+    EditLabel.ParentColor = False
+    TabOrder = 0
+    OnChange = EditPasswordChange
+  end
+  object ButtonTest: TButton
+    Left = 122
+    Height = 25
+    Top = 80
+    Width = 75
+    Caption = 'Test'
+    TabOrder = 1
+  end
+  object TextPassLength: TStaticText
+    Left = 24
+    Height = 17
+    Top = 134
+    Width = 43
+    Caption = 'Length'
+    Color = clDefault
+    Font.Color = clRed
+    ParentFont = False
+    ParentColor = False
+    TabOrder = 2
+  end
+  object TextPassLower: TStaticText
+    Left = 128
+    Height = 17
+    Top = 134
+    Width = 65
+    Caption = 'Lowercase'
+    Font.Color = clRed
+    ParentFont = False
+    TabOrder = 3
+  end
+  object TextPassUpper: TStaticText
+    Left = 232
+    Height = 17
+    Top = 134
+    Width = 56
+    Caption = 'Uppercase'
+    Font.Color = clRed
+    ParentFont = False
+    TabOrder = 4
+  end
+  object TextPassDigits: TStaticText
+    Left = 64
+    Height = 17
+    Top = 192
+    Width = 33
+    Caption = 'Digits'
+    Font.Color = clRed
+    ParentFont = False
+    TabOrder = 5
+  end
+  object TextPassSpecial: TStaticText
+    Left = 176
+    Height = 17
+    Top = 192
+    Width = 41
+    Caption = 'Special'
+    Font.Color = clRed
+    ParentFont = False
+    TabOrder = 6
+  end
+  object TextPassFail: TStaticText
+    Left = 144
+    Height = 17
+    Top = 240
+    Width = 25
+    Caption = 'Fail'
+    Font.Color = clRed
+    ParentFont = False
+    TabOrder = 7
+  end
+end

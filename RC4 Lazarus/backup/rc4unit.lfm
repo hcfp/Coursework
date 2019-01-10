@@ -1,0 +1,75 @@
+object Form1: TForm1
+  Left = 0
+  Height = 450
+  Top = 0
+  Width = 530
+  ActiveControl = EditPlaintext
+  Caption = 'Form1'
+  ClientHeight = 450
+  ClientWidth = 530
+  LCLVersion = '1.8.4.0'
+  Visible = True
+  object EditPlaintext: TEdit
+    Left = 25
+    Height = 23
+    Top = 129
+    Width = 384
+    TabOrder = 0
+  end
+  object EditCiphertext: TEdit
+    Left = 25
+    Height = 23
+    Top = 324
+    Width = 384
+    HideSelection = False
+    TabOrder = 1
+  end
+  object ButtonEncrypt: TButton
+    Left = 415
+    Height = 33
+    Top = 120
+    Width = 113
+    Caption = 'Encrypt'
+    OnClick = ButtonEncryptClick
+    TabOrder = 2
+  end
+  object ButtonDecrypt: TButton
+    Left = 415
+    Height = 33
+    Top = 315
+    Width = 113
+    Caption = 'Decrypt'
+    OnClick = ButtonDecryptClick
+    TabOrder = 3
+  end
+  object Label1: TLabel
+    Left = 118
+    Height = 15
+    Top = 80
+    Width = 132
+    Caption = 'Enter plaintext in this box'
+    ParentColor = False
+  end
+  object Label3: TLabel
+    Left = 113
+    Height = 15
+    Top = 282
+    Width = 139
+    Caption = 'Enter ciphertext in this box'
+    ParentColor = False
+  end
+  object EditOutputCiphertext: TEdit
+    Left = 25
+    Height = 23
+    Top = 186
+    Width = 384
+    TabOrder = 4
+  end
+  object EditOutputPlaintext: TEdit
+    Left = 25
+    Height = 23
+    Top = 374
+    Width = 384
+    TabOrder = 5
+  end
+end

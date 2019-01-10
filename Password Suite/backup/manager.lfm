@@ -1,0 +1,135 @@
+object FormManager: TFormManager
+  Left = 0
+  Height = 550
+  Top = 0
+  Width = 1000
+  ActiveControl = PageControl1
+  Caption = 'FormManager'
+  ClientHeight = 550
+  ClientWidth = 1000
+  Position = poDesktopCenter
+  Visible = False
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 550
+    Top = 0
+    Width = 1000
+    ActivePage = TabSheetManager
+    TabIndex = 0
+    TabOrder = 0
+    object TabSheetManager: TTabSheet
+      Caption = 'Password Manager'
+      ClientHeight = 522
+      ClientWidth = 992
+      object ButtonConnect: TButton
+        Left = 592
+        Height = 25
+        Top = 96
+        Width = 75
+        Caption = 'Connect'
+        OnClick = ButtonConnectClick
+        TabOrder = 0
+      end
+      object Label1: TLabel
+        Left = 808
+        Height = 15
+        Top = 96
+        Width = 96
+        Caption = 'Add or Edit record'
+        ParentColor = False
+      end
+      object DBEdit1: TDBEdit
+        Left = 816
+        Height = 23
+        Top = 144
+        Width = 80
+        CharCase = ecNormal
+        MaxLength = 0
+        TabOrder = 1
+      end
+      object DBEdit2: TDBEdit
+        Left = 816
+        Height = 23
+        Top = 208
+        Width = 80
+        CharCase = ecNormal
+        MaxLength = 0
+        TabOrder = 2
+      end
+      object Label2: TLabel
+        Left = 816
+        Height = 15
+        Top = 120
+        Width = 76
+        Caption = 'Edit Username'
+        ParentColor = False
+      end
+      object Label3: TLabel
+        Left = 816
+        Height = 15
+        Top = 184
+        Width = 73
+        Caption = 'Edit Password'
+        ParentColor = False
+      end
+    end
+  end
+  object DBNavigator1: TDBNavigator
+    Left = 123
+    Height = 38
+    Top = 486
+    Width = 362
+    BevelOuter = bvNone
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 38
+    ClientWidth = 362
+    DataSource = Source
+    Options = []
+    TabOrder = 1
+  end
+  object Grid: TDBGrid
+    Left = 24
+    Height = 360
+    Top = 120
+    Width = 560
+    Color = clWindow
+    Columns = <>
+    DataSource = Source
+    TabOrder = 2
+  end
+  object Query: TSQLQuery
+    FieldDefs = <>
+    AfterDelete = QueryAfterDelete
+    AfterPost = QueryAfterPost
+    Database = Conn
+    Transaction = Trans
+    Params = <>
+    left = 32
+    top = 48
+  end
+  object Conn: TSQLite3Connection
+    Connected = False
+    LoginPrompt = False
+    DatabaseName = 'C:\Users\habib\Documents\Everything\School\Computing\Computing-Coursework\Password Suite\Password Suite\PasswordSuite.db'
+    KeepConnection = False
+    Transaction = Trans
+    left = 176
+    top = 48
+  end
+  object Trans: TSQLTransaction
+    Active = False
+    Database = Conn
+    left = 336
+    top = 48
+  end
+  object Source: TDataSource
+    DataSet = Query
+    left = 479
+    top = 48
+  end
+end

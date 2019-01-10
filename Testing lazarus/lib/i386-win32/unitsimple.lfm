@@ -1,0 +1,92 @@
+object Form3: TForm3
+  Left = 0
+  Height = 278
+  Top = 0
+  Width = 347
+  ActiveControl = EditPassword
+  Caption = 'Form3'
+  ClientHeight = 278
+  ClientWidth = 347
+  Position = poDesktopCenter
+  Visible = False
+  object EditPassword: TLabeledEdit
+    Left = 56
+    Height = 23
+    Top = 48
+    Width = 207
+    EditLabel.AnchorSideLeft.Control = EditPassword
+    EditLabel.AnchorSideRight.Control = EditPassword
+    EditLabel.AnchorSideRight.Side = asrBottom
+    EditLabel.AnchorSideBottom.Control = EditPassword
+    EditLabel.Left = 56
+    EditLabel.Height = 15
+    EditLabel.Top = 30
+    EditLabel.Width = 207
+    EditLabel.Caption = 'Enter password to be tested'
+    EditLabel.ParentColor = False
+    TabOrder = 0
+    OnChange = EditPasswordChange
+  end
+  object TextPassLength: TStaticText
+    Left = 32
+    Height = 17
+    Top = 104
+    Width = 43
+    Caption = 'Length'
+    Color = clDefault
+    Font.Color = clRed
+    ParentFont = False
+    ParentColor = False
+    TabOrder = 1
+  end
+  object TextPassLower: TStaticText
+    Left = 125
+    Height = 17
+    Top = 104
+    Width = 65
+    Caption = 'Lowercase'
+    Font.Color = clRed
+    ParentFont = False
+    TabOrder = 2
+  end
+  object TextPassUpper: TStaticText
+    Left = 240
+    Height = 17
+    Top = 104
+    Width = 56
+    Caption = 'Uppercase'
+    Font.Color = clRed
+    ParentFont = False
+    TabOrder = 3
+  end
+  object TextPassDigits: TStaticText
+    Left = 184
+    Height = 17
+    Top = 152
+    Width = 41
+    Caption = 'Digits'
+    Font.Color = clRed
+    ParentFont = False
+    TabOrder = 4
+  end
+  object TextPassSpecial: TStaticText
+    Left = 72
+    Height = 17
+    Top = 152
+    Width = 33
+    Caption = 'Special'
+    Font.Color = clRed
+    ParentFont = False
+    TabOrder = 5
+  end
+  object TextPassFail: TStaticText
+    Left = 136
+    Height = 17
+    Top = 200
+    Width = 25
+    Caption = 'Fail'
+    Font.Color = clRed
+    ParentFont = False
+    TabOrder = 6
+  end
+end

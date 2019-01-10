@@ -1,0 +1,143 @@
+object FormTester: TFormTester
+  Left = 0
+  Height = 500
+  Top = 0
+  Width = 500
+  ActiveControl = PageControl1
+  Caption = 'Tester'
+  ClientHeight = 500
+  ClientWidth = 500
+  Position = poDesktopCenter
+  Visible = False
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 500
+    Top = 0
+    Width = 500
+    ActivePage = TabSheet2
+    TabIndex = 1
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Word List Test'
+      ClientHeight = 472
+      ClientWidth = 492
+      object FileNameEditGetPass: TFileNameEdit
+        Left = 16
+        Height = 23
+        Top = 72
+        Width = 447
+        FilterIndex = 0
+        HideDirectories = False
+        ButtonWidth = 23
+        NumGlyphs = 1
+        MaxLength = 0
+        TabOrder = 0
+      end
+      object EditGetPass: TLabeledEdit
+        Left = 16
+        Height = 23
+        Top = 152
+        Width = 424
+        EditLabel.AnchorSideLeft.Control = EditGetPass
+        EditLabel.AnchorSideRight.Control = EditGetPass
+        EditLabel.AnchorSideRight.Side = asrBottom
+        EditLabel.AnchorSideBottom.Control = EditGetPass
+        EditLabel.Left = 16
+        EditLabel.Height = 15
+        EditLabel.Top = 134
+        EditLabel.Width = 424
+        EditLabel.Caption = 'Enter password to be tested'
+        EditLabel.ParentColor = False
+        TabOrder = 1
+      end
+      object LabelWordList: TLabel
+        Left = 16
+        Height = 15
+        Top = 55
+        Width = 80
+        Caption = 'Locate wordlist'
+        ParentColor = False
+      end
+      object ButtonTestWords: TButton
+        Left = 176
+        Height = 25
+        Top = 200
+        Width = 75
+        Caption = 'Test'
+        OnClick = ButtonTestWordsClick
+        TabOrder = 2
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Requirements Test'
+      ClientHeight = 472
+      ClientWidth = 492
+      object EditPassword: TLabeledEdit
+        Left = 80
+        Height = 23
+        Top = 96
+        Width = 265
+        EditLabel.AnchorSideLeft.Control = EditPassword
+        EditLabel.AnchorSideRight.Control = EditPassword
+        EditLabel.AnchorSideRight.Side = asrBottom
+        EditLabel.AnchorSideBottom.Control = EditPassword
+        EditLabel.Left = 80
+        EditLabel.Height = 15
+        EditLabel.Top = 78
+        EditLabel.Width = 265
+        EditLabel.Caption = 'Enter password to be tested'
+        EditLabel.ParentColor = False
+        TabOrder = 0
+        OnChange = EditPasswordChange
+      end
+      object TextPassLength: TStaticText
+        Left = 80
+        Height = 17
+        Top = 162
+        Width = 65
+        Caption = 'Length'
+        TabOrder = 1
+      end
+      object TextPassLower: TStaticText
+        Left = 180
+        Height = 17
+        Top = 162
+        Width = 65
+        Caption = 'Lowercase'
+        TabOrder = 2
+      end
+      object TextPassUpper: TStaticText
+        Left = 280
+        Height = 17
+        Top = 162
+        Width = 65
+        Caption = 'Uppercase'
+        TabOrder = 3
+      end
+      object TextPassDigits: TStaticText
+        Left = 80
+        Height = 17
+        Top = 224
+        Width = 65
+        Caption = 'Digits'
+        TabOrder = 4
+      end
+      object TextPassSpecial: TStaticText
+        Left = 280
+        Height = 17
+        Top = 224
+        Width = 65
+        Caption = 'Special'
+        TabOrder = 5
+      end
+      object TextPassFail: TStaticText
+        Left = 202
+        Height = 17
+        Top = 264
+        Width = 25
+        Caption = 'Fail'
+        TabOrder = 6
+      end
+    end
+  end
+end

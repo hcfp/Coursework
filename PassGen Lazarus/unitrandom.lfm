@@ -1,0 +1,106 @@
+object Form3: TForm3
+  Left = 0
+  Height = 250
+  Top = 0
+  Width = 368
+  ActiveControl = SpinEditLength
+  Caption = 'Form3'
+  ClientHeight = 250
+  ClientWidth = 368
+  Position = poDesktopCenter
+  Visible = False
+  object LabelLength: TLabel
+    Left = 116
+    Height = 15
+    Top = 8
+    Width = 104
+    Caption = 'Length of password'
+    ParentColor = False
+  end
+  object SpinEditLength: TSpinEdit
+    Left = 135
+    Height = 23
+    Top = 32
+    Width = 66
+    MinValue = 8
+    TabOrder = 0
+    Value = 8
+  end
+  object ButtonGenRandom: TButton
+    Left = 216
+    Height = 25
+    Top = 173
+    Width = 75
+    Caption = 'Generate'
+    OnClick = ButtonGenRandomClick
+    TabOrder = 1
+  end
+  object EditOutput: TEdit
+    Left = 40
+    Height = 23
+    Top = 175
+    Width = 165
+    TabOrder = 2
+  end
+  object LabelGenerated: TLabel
+    Left = 69
+    Height = 15
+    Top = 160
+    Width = 107
+    Caption = 'Generated password'
+    ParentColor = False
+  end
+  object LabelCaps: TLabel
+    Left = 136
+    Height = 15
+    Top = 88
+    Width = 72
+    Caption = 'Capital letters'
+    ParentColor = False
+  end
+  object LabelDigit: TLabel
+    Left = 34
+    Height = 15
+    Top = 88
+    Width = 30
+    Caption = 'Digits'
+    ParentColor = False
+  end
+  object LabelSpecial: TLabel
+    Left = 271
+    Height = 15
+    Top = 96
+    Width = 37
+    Caption = 'Special'
+    ParentColor = False
+  end
+  object LabelRandom: TLabel
+    Left = 88
+    Height = 15
+    Top = 72
+    Width = 171
+    Caption = 'Set all to 0 for a random number'
+    ParentColor = False
+  end
+  object SpinEditCaps: TSpinEdit
+    Left = 139
+    Height = 23
+    Top = 110
+    Width = 66
+    TabOrder = 3
+  end
+  object SpinEditDigits: TSpinEdit
+    Left = 16
+    Height = 23
+    Top = 110
+    Width = 66
+    TabOrder = 4
+  end
+  object SpinEditSpecial: TSpinEdit
+    Left = 256
+    Height = 23
+    Top = 110
+    Width = 66
+    TabOrder = 5
+  end
+end

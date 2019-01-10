@@ -1,0 +1,59 @@
+object Form2: TForm2
+  Left = 0
+  Height = 240
+  Top = 0
+  Width = 320
+  ActiveControl = ButtonGenWords
+  Caption = 'Form2'
+  ClientHeight = 240
+  ClientWidth = 320
+  Position = poDesktopCenter
+  Visible = False
+  object ButtonGenWords: TButton
+    Left = 229
+    Height = 25
+    Top = 144
+    Width = 75
+    Caption = 'Generate'
+    OnClick = ButtonGenWordsClick
+    TabOrder = 0
+  end
+  object SpinEditNumOfWords: TSpinEdit
+    Left = 116
+    Height = 23
+    Top = 88
+    Width = 89
+    MaxValue = 10
+    TabOrder = 1
+    Value = 3
+  end
+  object FileNameEditWordList: TFileNameEdit
+    Left = 16
+    Height = 23
+    Top = 48
+    Width = 288
+    FileName = 'C:\Users\habib\Documents\Everything\School\Computing\Computing-Coursework\PassGen Lazarus\words.txt'
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonWidth = 23
+    NumGlyphs = 1
+    MaxLength = 0
+    TabOrder = 2
+    Text = 'C:\Users\habib\Documents\Everything\School\Computing\Computing-Coursework\PassGen Lazarus\words.txt'
+  end
+  object LabelOpen: TLabel
+    Left = 16
+    Height = 15
+    Top = 24
+    Width = 103
+    Caption = 'Locate the word list'
+    ParentColor = False
+  end
+  object EditOutputWords: TEdit
+    Left = 16
+    Height = 23
+    Top = 144
+    Width = 208
+    TabOrder = 3
+  end
+end
