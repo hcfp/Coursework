@@ -14,8 +14,8 @@ type
 
   TFormManager = class(TForm)
     ButtonConnect: TButton;
-    DBEdit1: TDBEdit;
-    DBEdit2: TDBEdit;
+    DBEditUsername: TDBEdit;
+    DBEditPassword: TDBEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -51,14 +51,22 @@ procedure TFormManager.ButtonConnectClick(Sender: TObject);
 var
   i: integer;
 begin
-  conn.Open;
+  {conn.Open;
   query.Close;
   query.sql.Clear;
   //the sql query displayed in dbgrid
-  query.sql.Text := 'SELECT Username, Password FROM Manager';
-
+  query.sql.Text := 'SELECT UserID, Username, Password FROM Manager';
   query.Open;
   query.active := True;
+  //makes the collums smaller than the defualt
+  for i := 0 to grid.Columns.Count - 1 do
+    grid.Columns.Items[i].Width := 90;    }
+
+  query.close;
+  //the sql query displayed in dbgrid
+  query.sql.Text := 'SELECT UserID, Username, Password FROM Manager';
+  query.open;
+  query.active := true;
   //makes the collums smaller than the defualt
   for i := 0 to grid.Columns.Count - 1 do
     grid.Columns.Items[i].Width := 90;
@@ -67,8 +75,9 @@ end;
 //applys edits, edits and deletions made using dbgrid
 procedure TFormManager.QueryAfterDelete();
 begin
-  try
+    try
   //applys edits and inserts made using dbgrid
+    query.active := false;
     query.ApplyUpdates;
     Trans.Commit;
   except
@@ -82,6 +91,8 @@ begin
   try
   //applys edits and inserts made using dbgrid
     query.ApplyUpdates;
+    trans.endtransaction;
+    trans.starttransaction;
     Trans.Commit;
   except
     on E: Exception do

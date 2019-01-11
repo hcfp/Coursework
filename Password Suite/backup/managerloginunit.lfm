@@ -7,12 +7,13 @@ object FormManagerLogin: TFormManagerLogin
   Caption = 'Login to Manager'
   ClientHeight = 500
   ClientWidth = 500
+  DesignTimePPI = 144
   OnCreate = FormCreate
   Position = poDesktopCenter
   Visible = False
   object EditUsername: TLabeledEdit
     Left = 160
-    Height = 23
+    Height = 33
     Top = 160
     Width = 164
     EditLabel.AnchorSideLeft.Control = EditUsername
@@ -20,8 +21,8 @@ object FormManagerLogin: TFormManagerLogin
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = EditUsername
     EditLabel.Left = 160
-    EditLabel.Height = 15
-    EditLabel.Top = 142
+    EditLabel.Height = 25
+    EditLabel.Top = 132
     EditLabel.Width = 164
     EditLabel.Caption = 'Username'
     EditLabel.ParentColor = False
@@ -29,7 +30,7 @@ object FormManagerLogin: TFormManagerLogin
   end
   object EditPassword: TLabeledEdit
     Left = 160
-    Height = 23
+    Height = 33
     Top = 222
     Width = 164
     EchoMode = emPassword
@@ -38,8 +39,8 @@ object FormManagerLogin: TFormManagerLogin
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = EditPassword
     EditLabel.Left = 160
-    EditLabel.Height = 15
-    EditLabel.Top = 204
+    EditLabel.Height = 25
+    EditLabel.Top = 194
     EditLabel.Width = 164
     EditLabel.Caption = 'Password'
     EditLabel.ParentColor = False
@@ -57,9 +58,9 @@ object FormManagerLogin: TFormManagerLogin
   end
   object CheckBoxPassword: TCheckBox
     Left = 336
-    Height = 19
+    Height = 29
     Top = 224
-    Width = 102
+    Width = 155
     Caption = 'Show Password'
     OnChange = CheckBoxPasswordChange
     TabOrder = 3
@@ -76,7 +77,7 @@ object FormManagerLogin: TFormManagerLogin
   object Conn: TSQLite3Connection
     Connected = False
     LoginPrompt = False
-    DatabaseName = 'C:\Users\habib\Documents\Everything\School\Computing\Computing-Coursework\Password Suite\Password Suite\PasswordSuite.db'
+    DatabaseName = 'C:\Users\habib\Documents\Computing\Coursework\Password Suite\PasswordSuite.db'
     KeepConnection = False
     Transaction = Trans
     HostName = 'localhost'

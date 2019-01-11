@@ -7,37 +7,38 @@ object Form1: TForm1
   Caption = 'Form1'
   ClientHeight = 551
   ClientWidth = 1181
+  DesignTimePPI = 144
   OnCreate = FormCreate
   Position = poDesktopCenter
   ShowInTaskBar = stAlways
   Visible = False
   object EditUsername: TEdit
     Left = 66
-    Height = 23
+    Height = 33
     Top = 170
     Width = 128
     TabOrder = 0
   end
   object EditPassword: TEdit
     Left = 66
-    Height = 23
+    Height = 33
     Top = 230
     Width = 128
     TabOrder = 1
   end
   object Label1: TLabel
     Left = 104
-    Height = 15
+    Height = 25
     Top = 144
-    Width = 53
+    Width = 79
     Caption = 'Username'
     ParentColor = False
   end
   object Label2: TLabel
     Left = 105
-    Height = 15
+    Height = 25
     Top = 204
-    Width = 50
+    Width = 75
     Caption = 'Password'
     ParentColor = False
   end
@@ -89,7 +90,7 @@ object Form1: TForm1
   end
   object DBEditUsername: TDBEdit
     Left = 848
-    Height = 23
+    Height = 33
     Top = 81
     Width = 128
     DataField = 'Username'
@@ -100,7 +101,7 @@ object Form1: TForm1
   end
   object DBEditPassword: TDBEdit
     Left = 848
-    Height = 23
+    Height = 33
     Top = 139
     Width = 128
     DataField = 'Password'
@@ -111,24 +112,24 @@ object Form1: TForm1
   end
   object LabelEditUsername: TLabel
     Left = 874
-    Height = 15
+    Height = 25
     Top = 56
-    Width = 76
+    Width = 114
     Caption = 'Edit Username'
     ParentColor = False
   end
   object LabelEditPassword: TLabel
     Left = 876
-    Height = 15
+    Height = 25
     Top = 114
-    Width = 73
+    Width = 110
     Caption = 'Edit Password'
     ParentColor = False
   end
   object conn: TSQLite3Connection
     Connected = False
     LoginPrompt = False
-    DatabaseName = 'C:\Users\habib\Documents\Everything\School\Computing\Computing-Coursework\Lazarus Database\userpass.db'
+    DatabaseName = 'C:\Users\habib\Documents\Computing\Coursework\Lazarus Database\userpass.db'
     KeepConnection = False
     Transaction = trans
     HostName = 'localhost'

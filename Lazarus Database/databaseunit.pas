@@ -135,7 +135,7 @@ begin
   query.active := true;
   //makes the collums smaller than the defualt
   for i := 0 to grid.Columns.Count - 1 do
-  grid.Columns.Items[i].Width := 90;
+    grid.Columns.Items[i].Width := 90;
 end;
 
 end.
