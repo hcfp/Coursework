@@ -31,7 +31,6 @@ type
     trans: TSQLTransaction;
     procedure ButtonConnectClick(Sender: TObject);
     procedure ButtonSubmitClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure queryAfterDelete();
     procedure queryAfterPost();
   private
@@ -48,42 +47,6 @@ implementation
 {$R *.lfm}
 
 { TForm1 }
-
-procedure TForm1.FormCreate(Sender: TObject);
-var
-  newFile : Boolean;
-begin
-
-  conn.Close; // Ensure the connection is closed at start start
-
-  try
-    // Since we're making this database for the first time,
-    // check whether the file already exists
-    newFile := not FileExists(conn.DatabaseName);
-
-    if newFile then
-    begin
-      // Create the database and the tables
-      try
-        conn.Open;
-        trans.Active := true;
-        //creates the table
-        conn.ExecuteDirect('CREATE TABLE "LoginInformation" (' +
-                            '"UserID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'+
-                            '"Username" VARCHAR(50),'+
-                            '"Password" VARCHAR(50));');
-        trans.Commit;
-        //only shows when all columns etc are creates as defined
-        ShowMessage('Succesfully created database.');
-      except
-        //doesnt show when the file is created but not as defined
-        ShowMessage('Unable to Create new Database');
-      end;
-    end;
-  except
-    ShowMessage('Unable to check if database file exists');
-  end;
-end;
 
 procedure TForm1.queryAfterDelete();
 begin
@@ -128,9 +91,10 @@ procedure TForm1.ButtonConnectClick(Sender: TObject);
 var
   i : integer;
 begin
+  conn.open;
   query.close;
   //the sql query displayed in dbgrid
-  query.sql.text := ('SELECT * FROM LoginInformation');
+  query.sql.text := ('SELECT * FROM Manager');
   query.open;
   query.active := true;
   //makes the collums smaller than the defualt

@@ -7,7 +7,6 @@ object FormManager: TFormManager
   Caption = 'FormManager'
   ClientHeight = 550
   ClientWidth = 1000
-  DesignTimePPI = 144
   Position = poDesktopCenter
   Visible = False
   object PageControl1: TPageControl
@@ -20,7 +19,7 @@ object FormManager: TFormManager
     TabOrder = 0
     object TabSheetManager: TTabSheet
       Caption = 'Password Manager'
-      ClientHeight = 512
+      ClientHeight = 522
       ClientWidth = 992
       object ButtonConnect: TButton
         Left = 592
@@ -31,30 +30,29 @@ object FormManager: TFormManager
         OnClick = ButtonConnectClick
         TabOrder = 0
       end
-      object Label1: TLabel
-        Left = 776
-        Height = 25
+      object LabelAddEdit: TLabel
+        Left = 801
+        Height = 15
         Top = 96
-        Width = 147
+        Width = 96
         Caption = 'Add or Edit record'
         ParentColor = False
       end
       object DBEditUsername: TDBEdit
         Left = 745
-        Height = 33
-        Top = 158
+        Height = 23
+        Top = 194
         Width = 208
         DataField = 'Username'
         DataSource = Source
         CharCase = ecNormal
         MaxLength = 0
         TabOrder = 1
-        OnChange = DBEditUsernameChange
       end
       object DBEditPassword: TDBEdit
         Left = 745
-        Height = 33
-        Top = 223
+        Height = 23
+        Top = 246
         Width = 208
         DataField = 'Password'
         DataSource = Source
@@ -62,20 +60,39 @@ object FormManager: TFormManager
         MaxLength = 0
         TabOrder = 2
       end
-      object Label2: TLabel
-        Left = 792
-        Height = 25
-        Top = 133
-        Width = 114
+      object LabelEditUsername: TLabel
+        Left = 811
+        Height = 15
+        Top = 172
+        Width = 76
         Caption = 'Edit Username'
         ParentColor = False
       end
-      object Label3: TLabel
-        Left = 794
-        Height = 25
-        Top = 199
-        Width = 110
+      object LabelEditPassword: TLabel
+        Left = 813
+        Height = 15
+        Top = 224
+        Width = 73
         Caption = 'Edit Password'
+        ParentColor = False
+      end
+      object DBEditPassword1: TDBEdit
+        Left = 745
+        Height = 23
+        Top = 142
+        Width = 208
+        DataField = 'UserID'
+        DataSource = Source
+        CharCase = ecNormal
+        MaxLength = 0
+        TabOrder = 3
+      end
+      object LabelEditUserID: TLabel
+        Left = 821
+        Height = 15
+        Top = 120
+        Width = 57
+        Caption = 'Edit UserID'
         ParentColor = False
       end
     end
@@ -111,6 +128,16 @@ object FormManager: TFormManager
   object Query: TSQLQuery
     FieldDefs = <    
       item
+        Name = 'EntryID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'UserID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
         Name = 'Username'
         DataType = ftString
         Precision = -1
@@ -127,7 +154,7 @@ object FormManager: TFormManager
     Database = Conn
     Transaction = Trans
     SQL.Strings = (
-      'SELECT Username, Password FROM Manager'
+      'SELECT * FROM Manager'
     )
     Params = <>
     left = 32
@@ -136,7 +163,7 @@ object FormManager: TFormManager
   object Conn: TSQLite3Connection
     Connected = True
     LoginPrompt = False
-    DatabaseName = 'C:\Users\habib\Documents\Computing\Coursework\Password Suite\PasswordSuite.db'
+    DatabaseName = 'C:\Users\habib\Documents\Everything\School\Computing\Coursework\Password Suite\PasswordSuite.db'
     KeepConnection = False
     Transaction = Trans
     left = 176

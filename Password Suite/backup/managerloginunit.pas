@@ -127,6 +127,9 @@ begin
   begin
     ShowMessage('Login  to User: ' + UserId + ' Successful');
     //Clears login details for when login screen is accessed again
+    FormManagerLogin.Conn.close;
+    FormManagerLogin.Trans.EndTransaction;
+    query.close;
     EditUsername.Text := '';
     EditPassword.Text := '';
     EnteredUsername := '';
