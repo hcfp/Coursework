@@ -30,6 +30,7 @@ type
     Trans: TSQLTransaction;
     TabSheetManager: TTabSheet;
     procedure ButtonConnectClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
     procedure QueryAfterDelete();
     procedure QueryAfterPost();
   private
@@ -53,10 +54,11 @@ procedure TFormManager.ButtonConnectClick(Sender: TObject);
 var
   i: integer;
 begin
-  conn.open;
+  conn.Open;
   query.Close;
   //the sql query displayed in dbgrid
-  query.sql.Text := 'SELECT UserID, Username, Password FROM Manager';
+  query.sql.Text := ('SELECT UserID, Username, Password FROM Manager WHERE UserID = '
+    + UserID);
   query.Open;
   query.active := True;
   //makes the collums smaller than the defualt
@@ -64,11 +66,16 @@ begin
     grid.Columns.Items[i].Width := 90;
 end;
 
+procedure TFormManager.FormCreate(Sender: TObject);
+begin
+  grid.AllowOutboundEvents:=false;
+end;
+
 //applys edits, edits and deletions made using dbgrid
 procedure TFormManager.QueryAfterDelete();
 begin
   try
-  //applys edits and inserts made using dbgrid
+    //applys edits and inserts made using dbgrid
     query.ApplyUpdates;
     Trans.Commit;
   except
@@ -80,7 +87,7 @@ end;
 procedure TFormManager.QueryAfterPost();
 begin
   try
-  //applys edits and inserts made using dbgrid
+    //applys edits and inserts made using dbgrid
     query.ApplyUpdates;
     Trans.Commit;
   except

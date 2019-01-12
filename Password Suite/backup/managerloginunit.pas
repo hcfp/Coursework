@@ -42,24 +42,21 @@ implementation
 { TFormManagerLogin }
 
 procedure TFormManagerLogin.FormCreate(Sender: TObject);
-var
-  newFile: boolean;
 begin
   conn.Close; // Ensure the connection is closed at start start
   try
     // Since we're making this database for the first time,
     // check whether the file already exists
-    newFile := not FileExists(conn.DatabaseName);
-    if newFile then
+    if not FileExists(conn.DatabaseName) then
     begin
       // Create the database and the tables
       try
         conn.Open;
         Trans.StartTransaction;
         //creates the LoginInformation table
-        conn.ExecuteDirect('CREATE TABLE "LoginInformation" (' +
-          '"UserID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,' +
-          '"Username" VARCHAR(50),' + '"Password" VARCHAR(50));');
+        conn.ExecuteDirect('CREATE TABLE `LoginInformation` ( ' +
+          '"UserID" INTEGER PRIMARY KEY ,' + '"Username" VARCHAR(50),' +
+          '"Password" VARCHAR(50));');
         trans.Commit;
         //creates the Manager table
         conn.ExecuteDirect('CREATE TABLE "Manager" (' +
@@ -69,7 +66,7 @@ begin
         //only shows when all columns etc are creates as defined
         ShowMessage('Succesfully created database.');
       except
-        // shows when the file is not created
+        //shows when the file is not created or not created as defined
         ShowMessage('Unable to Create new Database');
       end;
     end;
@@ -95,15 +92,25 @@ var
 begin
   username := EditUsername.Text;
   password := EditPassword.Text;
-  // formats strings to fit in the sql query string
-  username := '"' + username + '"';
-  password := '"' + password + '"';
-  //UserID value is null since it is an auto-incremented field
-  conn.ExecuteDirect('INSERT INTO LoginInformation (UserID,Username, Password) VALUES (NULL,'
-    + username + ',' + password + ');');
-  trans.Commit;
-  Conn.Close;
-  ShowMessage('Added to DB');
+  Query.Close;
+  Query.SQL.Text := 'SELECT Username FROM LoginInformation WHERE Username = ' +
+    '"' + username + '"';
+  Query.Open;
+  if Query.FieldByName('Username').AsString = '' then
+  begin
+    // formats strings to fit in the sql query string
+    username := '"' + username + '"';
+    password := '"' + password + '"';
+    //UserID value is null since it is an auto-incremented field
+    conn.ExecuteDirect(
+      'INSERT INTO LoginInformation (UserID,Username, Password) VALUES (NULL,' +
+      username + ',' + password + ');');
+    trans.Commit;
+    Conn.Close;
+    ShowMessage('Added to DB');
+  end
+  else
+    ShowMessage('Username not available');
 end;
 
 procedure TFormManagerLogin.ButtonLoginClick(Sender: TObject);
@@ -127,9 +134,9 @@ begin
   begin
     ShowMessage('Login  to User: ' + UserId + ' Successful');
     //Clears login details for when login screen is accessed again
-    FormManagerLogin.Conn.close;
+    FormManagerLogin.Conn.Close;
     FormManagerLogin.Trans.EndTransaction;
-    query.close;
+    FormManagerLogin.Query.Close;
     EditUsername.Text := '';
     EditPassword.Text := '';
     EnteredUsername := '';
@@ -137,6 +144,9 @@ begin
     FormManagerLogin.Hide;
     FormManager.ShowModal;
     FormManagerLogin.Show;
+    FormManager.Conn.Close;
+    FormManager.Trans.EndTransaction;
+    FormManager.Query.Close;
   end
   else
   begin
