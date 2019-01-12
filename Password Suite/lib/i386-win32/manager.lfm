@@ -9,7 +9,6 @@ object FormManager: TFormManager
   ClientWidth = 1000
   OnCreate = FormCreate
   Position = poDesktopCenter
-  Visible = False
   object PageControl1: TPageControl
     Left = 0
     Height = 550
@@ -23,85 +22,20 @@ object FormManager: TFormManager
       ClientHeight = 522
       ClientWidth = 992
       object ButtonConnect: TButton
-        Left = 592
+        Left = 656
         Height = 25
-        Top = 96
+        Top = 472
         Width = 75
         Caption = 'Connect'
         OnClick = ButtonConnectClick
         TabOrder = 0
       end
-      object LabelAddEdit: TLabel
-        Left = 801
-        Height = 15
-        Top = 96
-        Width = 96
-        Caption = 'Add or Edit record'
-        ParentColor = False
-      end
-      object DBEditUsername: TDBEdit
-        Left = 745
-        Height = 23
-        Top = 194
-        Width = 208
-        DataField = 'Username'
-        DataSource = Source
-        CharCase = ecNormal
-        MaxLength = 0
-        TabOrder = 1
-      end
-      object DBEditPassword: TDBEdit
-        Left = 745
-        Height = 23
-        Top = 246
-        Width = 208
-        DataField = 'Password'
-        DataSource = Source
-        CharCase = ecNormal
-        MaxLength = 0
-        TabOrder = 2
-      end
-      object LabelEditUsername: TLabel
-        Left = 811
-        Height = 15
-        Top = 172
-        Width = 76
-        Caption = 'Edit Username'
-        ParentColor = False
-      end
-      object LabelEditPassword: TLabel
-        Left = 813
-        Height = 15
-        Top = 224
-        Width = 73
-        Caption = 'Edit Password'
-        ParentColor = False
-      end
-      object DBEditPassword1: TDBEdit
-        Left = 745
-        Height = 23
-        Top = 142
-        Width = 208
-        DataField = 'UserID'
-        DataSource = Source
-        CharCase = ecNormal
-        MaxLength = 0
-        TabOrder = 3
-      end
-      object LabelEditUserID: TLabel
-        Left = 821
-        Height = 15
-        Top = 120
-        Width = 57
-        Caption = 'Edit UserID'
-        ParentColor = False
-      end
     end
   end
   object DBNavigator1: TDBNavigator
-    Left = 123
+    Left = 264
     Height = 38
-    Top = 486
+    Top = 488
     Width = 362
     BevelOuter = bvNone
     ChildSizing.EnlargeHorizontal = crsScaleChilds
@@ -117,9 +51,9 @@ object FormManager: TFormManager
     TabOrder = 1
   end
   object Grid: TDBGrid
-    Left = 24
+    Left = 208
     Height = 360
-    Top = 120
+    Top = 112
     Width = 560
     Color = clWindow
     Columns = <>

@@ -14,13 +14,6 @@ type
 
   TFormManager = class(TForm)
     ButtonConnect: TButton;
-    DBEditPassword1: TDBEdit;
-    DBEditUsername: TDBEdit;
-    DBEditPassword: TDBEdit;
-    LabelAddEdit: TLabel;
-    LabelEditUsername: TLabel;
-    LabelEditPassword: TLabel;
-    LabelEditUserID: TLabel;
     Source: TDataSource;
     Grid: TDBGrid;
     DBNavigator1: TDBNavigator;
@@ -50,6 +43,11 @@ uses ManagerLoginUnit;
 
 { TFormManager }
 
+procedure TFormManager.FormCreate(Sender: TObject);
+begin
+  Grid.AllowOutboundEvents := false;
+end;
+
 procedure TFormManager.ButtonConnectClick(Sender: TObject);
 var
   i: integer;
@@ -57,7 +55,7 @@ begin
   conn.Open;
   query.Close;
   //the sql query displayed in dbgrid
-  query.sql.Text := ('SELECT UserID, Username, Password FROM Manager WHERE UserID = '
+  query.sql.Text := ('SELECT * FROM Manager WHERE UserID = '
     + UserID);
   query.Open;
   query.active := True;
@@ -66,18 +64,13 @@ begin
     grid.Columns.Items[i].Width := 90;
 end;
 
-procedure TFormManager.FormCreate(Sender: TObject);
-begin
-  Grid.AllowOutboundEvents:=false;
-end;
-
 //applys edits, edits and deletions made using dbgrid
 procedure TFormManager.QueryAfterDelete();
 begin
   try
     //applys edits and inserts made using dbgrid
     query.ApplyUpdates;
-    Trans.Commit;
+    Trans.CommitRetaining;
   except
     on E: Exception do
       ShowMessage('Error');
@@ -89,7 +82,7 @@ begin
   try
     //applys edits and inserts made using dbgrid
     query.ApplyUpdates;
-    Trans.Commit;
+    Trans.CommitRetaining;
   except
     on E: Exception do
       ShowMessage('Error');
