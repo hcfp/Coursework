@@ -41,6 +41,24 @@ implementation
 
 { TFormManagerLogin }
 
+function ELFHash(password: string): string;
+var
+  i, x, hashNum: cardinal; // cardinal cannot be negative unlike integer
+begin
+  hashNum := 0;
+  for i := 1 to length(password) do
+  begin
+    //binary shift left by 4 and add the ascii value of the current string element
+    hashNum := (hashNum shl 4) + Ord(password[i]);
+    //and this value with a key
+    x := hashNum and $F0000000;
+    if x <> 0 then
+      hashNum := hashNum xor (x shr 24);
+    hashNum := hashNum and (not x);
+  end;
+  Result := IntToHex(hashNum,8);
+end;
+
 procedure TFormManagerLogin.FormCreate(Sender: TObject);
 begin
   conn.Close; // Ensure the connection is closed at start start
@@ -100,6 +118,7 @@ begin
   begin
     // formats strings to fit in the sql query string
     username := '"' + username + '"';
+    password := ELFHash(password);
     password := '"' + password + '"';
     //UserID value is null since it is an auto-incremented field
     conn.ExecuteDirect(
@@ -120,6 +139,7 @@ begin
   query.Close;
   EnteredUsername := EditUsername.Text;
   EnteredPassword := EditPassword.Text;
+  EnteredPassword := ELFHash(EnteredPassword);
   Query.SQL.Clear;
   //gets the password associated with the inputted username
   Query.SQL.Text := 'SELECT UserId, Password FROM LoginInformation WHERE Username = ' +

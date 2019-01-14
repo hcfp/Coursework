@@ -16,13 +16,13 @@ type
     ButtonEncrypt: TButton;
     ButtonDecrypt: TButton;
     ButtonConnect: TButton;
+    Grid: TDBGrid;
     EditPlaintext: TLabeledEdit;
     EditOutputCiphertext: TLabeledEdit;
     EditCiphertext: TLabeledEdit;
     EditOutputPlaintext: TLabeledEdit;
     Query: TSQLQuery;
     Source: TDataSource;
-    Grid: TDBGrid;
     DBNavigator1: TDBNavigator;
     PageControl1: TPageControl;
     Conn: TSQLite3Connection;
@@ -40,12 +40,15 @@ type
   public
 
   end;
-
+  //This is a fixed size array that holds the keystream
   myArray = array[0..255] of integer;
+  //These arrays grow in size using the function
+  //SetLength which allows me to deal with variable length input
   dynamicArray = array of integer;
   dynamicArrayString = array of string;
 
 const
+  //The longer the key is, the more difficult  it is to brute force the encryption
   initialkey = 'key';
 
 var
@@ -62,6 +65,7 @@ uses ManagerLoginUnit;
 
 procedure TFormManager.FormCreate(Sender: TObject);
 begin
+  //This stops a crash when pressing tab whilst in a dbgrid field
   Grid.AllowOutboundEvents := False;
 end;
 
@@ -73,11 +77,14 @@ begin
   query.Close;
   //the sql query displayed in dbgrid
   query.sql.Text := ('SELECT * FROM Manager WHERE UserID = ' + UserID);
+  showmessage('1');
   query.Open;
   query.active := True;
+  showmessage('2');
   //makes the collums smaller than the defualt
   for i := 0 to grid.Columns.Count - 1 do
     grid.Columns.Items[i].Width := 90;
+  showmessage('3');
 end;
 
 //applys edits, edits and deletions made using dbgrid
@@ -251,6 +258,8 @@ procedure TFormManager.ButtonEncryptClick(Sender: TObject);
 var
   cipherString: string;
 begin
+  //sets the initial key. This could change through the use of a salt which 
+  //would be stored alongside the user's username and password
   key := initialKey;
   setPlaintext;
   cipherString := encrypt;

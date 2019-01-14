@@ -16,13 +16,13 @@ type
     ButtonEncrypt: TButton;
     ButtonDecrypt: TButton;
     ButtonConnect: TButton;
+    Grid: TDBGrid;
     EditPlaintext: TLabeledEdit;
     EditOutputCiphertext: TLabeledEdit;
     EditCiphertext: TLabeledEdit;
     EditOutputPlaintext: TLabeledEdit;
     Query: TSQLQuery;
     Source: TDataSource;
-    Grid: TDBGrid;
     DBNavigator1: TDBNavigator;
     PageControl1: TPageControl;
     Conn: TSQLite3Connection;
@@ -77,11 +77,14 @@ begin
   query.Close;
   //the sql query displayed in dbgrid
   query.sql.Text := ('SELECT * FROM Manager WHERE UserID = ' + UserID);
+  showmessage('1');
   query.Open;
   query.active := True;
+  showmessage('2');
   //makes the collums smaller than the defualt
   for i := 0 to grid.Columns.Count - 1 do
     grid.Columns.Items[i].Width := 90;
+  showmessage('3');
 end;
 
 //applys edits, edits and deletions made using dbgrid

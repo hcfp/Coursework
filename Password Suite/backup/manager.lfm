@@ -7,43 +7,26 @@ object FormManager: TFormManager
   Caption = 'FormManager'
   ClientHeight = 550
   ClientWidth = 1000
+  DesignTimePPI = 144
   OnCreate = FormCreate
   Position = poDesktopCenter
+  Visible = False
   object PageControl1: TPageControl
     Left = 0
     Height = 550
     Top = 0
     Width = 1000
-    ActivePage = TabSheet1
-    TabIndex = 1
+    ActivePage = TabSheetManager
+    TabIndex = 0
     TabOrder = 0
     object TabSheetManager: TTabSheet
       Caption = 'Password Manager'
-      ClientHeight = 522
+      ClientHeight = 512
       ClientWidth = 992
-      object ButtonConnect: TButton
-        Left = 656
-        Height = 25
-        Top = 472
-        Width = 75
-        Caption = 'Connect'
-        OnClick = ButtonConnectClick
-        TabOrder = 0
-      end
-      object Grid: TDBGrid
-        Left = 200
-        Height = 360
-        Top = 88
-        Width = 560
-        Color = clWindow
-        Columns = <>
-        DataSource = Source
-        TabOrder = 1
-      end
       object DBNavigator1: TDBNavigator
-        Left = 256
+        Left = 248
         Height = 38
-        Top = 464
+        Top = 440
         Width = 362
         BevelOuter = bvNone
         ChildSizing.EnlargeHorizontal = crsScaleChilds
@@ -56,19 +39,44 @@ object FormManager: TFormManager
         ClientWidth = 362
         DataSource = Source
         Options = []
+        TabOrder = 0
+      end
+      object ButtonConnect: TButton
+        Left = 648
+        Height = 25
+        Top = 448
+        Width = 75
+        Caption = 'Connect'
+        OnClick = ButtonConnectClick
+        TabOrder = 1
+      end
+      object Grid: TDBGrid
+        Left = 80
+        Height = 320
+        Top = 104
+        Width = 792
+        Color = clWindow
+        Columns = <>
+        DataSource = Source
         TabOrder = 2
       end
     end
     object TabSheet1: TTabSheet
-      Caption = 'TabSheeteEncrypt'
-      ClientHeight = 522
+      Caption = 'Encryption'
+      ClientHeight = 512
       ClientWidth = 992
       object EditPlaintext: TLabeledEdit
         Left = 368
-        Height = 23
+        Height = 33
         Top = 152
         Width = 196
-        EditLabel.Height = 15
+        EditLabel.AnchorSideLeft.Control = EditPlaintext
+        EditLabel.AnchorSideRight.Control = EditPlaintext
+        EditLabel.AnchorSideRight.Side = asrBottom
+        EditLabel.AnchorSideBottom.Control = EditPlaintext
+        EditLabel.Left = 368
+        EditLabel.Height = 25
+        EditLabel.Top = 124
         EditLabel.Width = 196
         EditLabel.Caption = 'Plaintext Input'
         EditLabel.ParentColor = False
@@ -76,10 +84,16 @@ object FormManager: TFormManager
       end
       object EditOutputCiphertext: TLabeledEdit
         Left = 368
-        Height = 23
+        Height = 33
         Top = 216
         Width = 196
-        EditLabel.Height = 15
+        EditLabel.AnchorSideLeft.Control = EditOutputCiphertext
+        EditLabel.AnchorSideRight.Control = EditOutputCiphertext
+        EditLabel.AnchorSideRight.Side = asrBottom
+        EditLabel.AnchorSideBottom.Control = EditOutputCiphertext
+        EditLabel.Left = 368
+        EditLabel.Height = 25
+        EditLabel.Top = 188
         EditLabel.Width = 196
         EditLabel.Caption = 'Ciphertext Output'
         EditLabel.ParentColor = False
@@ -87,10 +101,16 @@ object FormManager: TFormManager
       end
       object EditCiphertext: TLabeledEdit
         Left = 368
-        Height = 23
+        Height = 33
         Top = 280
         Width = 196
-        EditLabel.Height = 15
+        EditLabel.AnchorSideLeft.Control = EditCiphertext
+        EditLabel.AnchorSideRight.Control = EditCiphertext
+        EditLabel.AnchorSideRight.Side = asrBottom
+        EditLabel.AnchorSideBottom.Control = EditCiphertext
+        EditLabel.Left = 368
+        EditLabel.Height = 25
+        EditLabel.Top = 252
         EditLabel.Width = 196
         EditLabel.Caption = 'Ciphertext Input'
         EditLabel.ParentColor = False
@@ -98,10 +118,16 @@ object FormManager: TFormManager
       end
       object EditOutputPlaintext: TLabeledEdit
         Left = 368
-        Height = 23
+        Height = 33
         Top = 344
         Width = 196
-        EditLabel.Height = 15
+        EditLabel.AnchorSideLeft.Control = EditOutputPlaintext
+        EditLabel.AnchorSideRight.Control = EditOutputPlaintext
+        EditLabel.AnchorSideRight.Side = asrBottom
+        EditLabel.AnchorSideBottom.Control = EditOutputPlaintext
+        EditLabel.Left = 368
+        EditLabel.Height = 25
+        EditLabel.Top = 316
         EditLabel.Width = 196
         EditLabel.Caption = 'Plaintext Output'
         EditLabel.ParentColor = False
@@ -130,7 +156,7 @@ object FormManager: TFormManager
   object Conn: TSQLite3Connection
     Connected = True
     LoginPrompt = False
-    DatabaseName = 'C:\Users\habib\Documents\Everything\School\Computing\Coursework\Password Suite\PasswordSuite.db'
+    DatabaseName = 'C:\Users\habib\Documents\Computing\Coursework\Password Suite\PasswordSuite.db'
     KeepConnection = False
     Transaction = Trans
     left = 176
@@ -143,14 +169,16 @@ object FormManager: TFormManager
     top = 48
   end
   object Source: TDataSource
+    DataSet = Query
     left = 479
     top = 48
   end
   object Query: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
     FieldDefs = <    
       item
         Name = 'EntryID'
-        DataType = ftInteger
+        DataType = ftAutoInc
         Precision = -1
       end    
       item
