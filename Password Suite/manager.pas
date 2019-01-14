@@ -40,12 +40,15 @@ type
   public
 
   end;
-
+  //This is a fixed size array that holds the keystream
   myArray = array[0..255] of integer;
+  //These arrays grow in size using the function
+  //SetLength which allows me to deal with variable length input
   dynamicArray = array of integer;
   dynamicArrayString = array of string;
 
 const
+  //The longer the key is, the more difficult  it is to brute force the encryption
   initialkey = 'key';
 
 var
@@ -62,6 +65,7 @@ uses ManagerLoginUnit;
 
 procedure TFormManager.FormCreate(Sender: TObject);
 begin
+  //This stops a crash when pressing tab whilst in a dbgrid field
   Grid.AllowOutboundEvents := False;
 end;
 
@@ -251,6 +255,8 @@ procedure TFormManager.ButtonEncryptClick(Sender: TObject);
 var
   cipherString: string;
 begin
+  //sets the initial key. This could change through the use of a salt which 
+  //would be stored alongside the user's username and password
   key := initialKey;
   setPlaintext;
   cipherString := encrypt;
