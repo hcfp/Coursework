@@ -50,7 +50,7 @@ const
 
 var
   FormManager: TFormManager;
-  plaintext, key : string;
+  plaintext, key: string;
 
 implementation
 
@@ -62,7 +62,7 @@ uses ManagerLoginUnit;
 
 procedure TFormManager.FormCreate(Sender: TObject);
 begin
-  Grid.AllowOutboundEvents := false;
+  Grid.AllowOutboundEvents := False;
 end;
 
 procedure TFormManager.ButtonConnectClick(Sender: TObject);
@@ -72,8 +72,7 @@ begin
   conn.Open;
   query.Close;
   //the sql query displayed in dbgrid
-  query.sql.Text := ('SELECT * FROM Manager WHERE UserID = '
-    + UserID);
+  query.sql.Text := ('SELECT * FROM Manager WHERE UserID = ' + UserID);
   query.Open;
   query.active := True;
   //makes the collums smaller than the defualt
@@ -109,7 +108,7 @@ end;
 function KSA(const key: string): myArray;
 var
   i, j, key_length, temp: integer;
-  S : myArray;
+  S: myArray;
 begin
   //come to brazil!!!
   key_length := length(key);
@@ -120,7 +119,7 @@ begin
   for i := Low(S) to High(S) do
   begin
     //processes S in 256 iterations similar to scramble bytes and mixes in bytes of the key
-    j := ((j + S[i] + ord(key[i mod key_length + 1])) mod 256);
+    j := ((j + S[i] + Ord(key[i mod key_length + 1])) mod 256);
     temp := S[i];
     S[i] := S[j];
     S[j] := temp;
@@ -177,7 +176,7 @@ begin
   begin
     sizeOfArray := sizeOfArray + 1;
     SetLength(cipher, sizeOfArray);
-    cipher[i] := (keystream[i]) xor (ord(plaintext[i + 1]));
+    cipher[i] := (keystream[i]) xor (Ord(plaintext[i + 1]));
   end;
   //converts the array of integers to an array of string representing hexadecimal values
   cipherString := '';
@@ -223,7 +222,7 @@ begin
   hexToDecimal := DecryptArrayInt;
 end;
 
-function decrypt(DecryptArrayInt: dynamicArray) : string;
+function decrypt(DecryptArrayInt: dynamicArray): string;
 var
   DecryptedString: string;
   S: myArray;
@@ -250,7 +249,7 @@ end;
 
 procedure TFormManager.ButtonEncryptClick(Sender: TObject);
 var
-  cipherString : string;
+  cipherString: string;
 begin
   key := initialKey;
   setPlaintext;
@@ -262,16 +261,17 @@ procedure TFormManager.ButtonDecryptClick(Sender: TObject);
 var
   DecryptArrayString: dynamicArrayString;
   DecryptArrayInt: dynamicArray;
-  DecryptedString : string;
+  DecryptedString: string;
 begin
   key := initialKey;
   //The inputted string is made into an array of hex values
-  DecryptArrayString := stringToHex(EditCiphertext.text);
+  DecryptArrayString := stringToHex(EditCiphertext.Text);
   // This is then converted to an array of integers suitable for XOR
   DecryptArrayInt := hexToDecimal(DecryptArrayString);
   //XOR'd with keystream to produce a plaintext string
   DecryptedString := decrypt(DecryptArrayInt);
-  FormManager.EditOutputPlaintext.text := DecryptedString;
+  FormManager.EditOutputPlaintext.Text := DecryptedString;
+
 end;
 
 end.
