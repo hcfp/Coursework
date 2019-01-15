@@ -168,7 +168,7 @@ begin
     readln(log, LastTimeLockedString);
   end;
   CloseFile(Log);
-  if MilliSecondsBetween(StrToTime(LastTimeLockedString), Time) > 60000 then
+  if MilliSecondsBetween(StrToTime(LastTimeLockedString), Time) > 30000 then
   begin
     attempts := attempts + 1;
     if attempts < 3 then
@@ -201,18 +201,22 @@ begin
         append(log);
         writeln(log, TimeToStr(TimeFirstLocked));
         CloseFile(Log);
+        ShowMessage('Too many attempts. Locked for 30 seconds');
       end;
-      AssignFile(Log, 'log.txt');
-      reset(log);
-      while not EOF(log) do
+      if attempts > 3 then
       begin
-        readln(log, LastTimeLockedString);
-      end;
-      CloseFile(Log);
-      if MilliSecondsBetween(StrToTime(LastTimeLockedString), Time) > 60000 then
-      begin
-        ShowMessage('Login has been unlocked. Try again');
-        attempts := 0;
+        AssignFile(Log, 'log.txt');
+        reset(log);
+        while not EOF(log) do
+        begin
+          readln(log, LastTimeLockedString);
+        end;
+        CloseFile(Log);
+        if MilliSecondsBetween(StrToTime(LastTimeLockedString), Time) > 30000 then
+        begin
+          ShowMessage('Login has been unlocked. Try again');
+          attempts := 0;
+        end;
       end;
     end;
   end
