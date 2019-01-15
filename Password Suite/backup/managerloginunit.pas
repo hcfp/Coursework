@@ -33,10 +33,10 @@ type
 
 var
   FormManagerLogin: TFormManagerLogin;
-  UserID, LastTimeLockedString : string;
-  attempts : integer;
-  TimeFirstLocked : TDateTime;
-  log : TextFile;
+  UserID, LastTimeLockedString: string;
+  attempts: integer;
+  TimeFirstLocked: TDateTime;
+  log: TextFile;
 
 implementation
 
@@ -59,7 +59,24 @@ begin
       hashNum := hashNum xor (x shr 24);
     hashNum := hashNum and (not x);
   end;
-  Result := IntToHex(hashNum,8);
+  Result := IntToHex(hashNum, 8);
+end;
+
+//Clears login details for when login screen is accessed again
+procedure resetConnection;
+begin
+  FormManagerLogin.Conn.Close;
+  FormManagerLogin.Trans.EndTransaction;
+  FormManagerLogin.Query.Close;
+  FormManagerLogin.EditUsername.Text := '';
+  FormManagerLogin.EditPassword.Text := '';
+  FormManagerLogin.Hide;
+  FormManager.ShowModal;
+  FormManagerLogin.Show;
+  FormManager.Conn.Close;
+  FormManager.Trans.EndTransaction;
+  FormManager.Query.Close;
+  attempts := 0;
 end;
 
 procedure TFormManagerLogin.FormCreate(Sender: TObject);
@@ -144,64 +161,63 @@ begin
   EnteredUsername := EditUsername.Text;
   EnteredPassword := EditPassword.Text;
   EnteredPassword := ELFHash(EnteredPassword);
-  if attempts < 3 then
+  AssignFile(Log, 'log.txt');
+  reset(log);
+  while not EOF(log) do
   begin
-    Query.SQL.Clear;
-    //gets the password associated with the inputted username
-    Query.SQL.Text := 'SELECT UserId, Password FROM LoginInformation WHERE Username = ' +
-      '"' + EnteredUsername + '"';
-    Query.Open;
-    //extracts the password from the query
-    Password := Query.FieldByName('Password').AsString;
-    UserID := Query.FieldByName('UserID').AsString;
-    //if the password entered by the user is the same as the password fetched
-    //from the databased corresponding to the username, the login is successful
-    if Password = EnteredPassword then
+    readln(log, LastTimeLockedString);
+  end;
+  CloseFile(Log);
+  if MilliSecondsBetween(StrToTime(LastTimeLockedString), Time) > 10000 then
+  begin
+    attempts := attempts + 1;
+    if attempts < 3 then
     begin
-      //Clears login details for when login screen is accessed again
-      FormManagerLogin.Conn.Close;
-      FormManagerLogin.Trans.EndTransaction;
-      FormManagerLogin.Query.Close;
-      EditUsername.Text := '';
-      EditPassword.Text := '';
-      EnteredUsername := '';
-      EnteredPassword := '';
-      FormManagerLogin.Hide;
-      FormManager.ShowModal;
-      FormManagerLogin.Show;
-      FormManager.Conn.Close;
-      FormManager.Trans.EndTransaction;
-      FormManager.Query.Close;
-      attempts := 0;
+      Query.SQL.Clear;
+      //gets the password associated with the inputted username
+      Query.SQL.Text := 'SELECT UserId, Password FROM LoginInformation WHERE Username = '
+        + '"' + EnteredUsername + '"';
+      Query.Open;
+      //extracts the password from the query
+      Password := Query.FieldByName('Password').AsString;
+      UserID := Query.FieldByName('UserID').AsString;
+      //if the password entered by the user is the same as the password fetched
+      //from the databased corresponding to the username, the login is successful
+      if Password = EnteredPassword then
+      begin
+        resetConnection;
+        EnteredUsername := '';
+        EnteredPassword := '';
+      end
+      else
+        ShowMessage('Login Failed');
     end
     else
     begin
-      ShowMessage('Login Failed');
-      attempts := attempts + 1;
+      if attempts = 3 then
+      begin
+        TimeFirstLocked := Time;
+        AssignFile(Log, 'log.txt');
+        append(log);
+        writeln(log, TimeToStr(TimeFirstLocked));
+        CloseFile(Log);
+      end;
+      AssignFile(Log, 'log.txt');
+      reset(log);
+      while not EOF(log) do
+      begin
+        readln(log, LastTimeLockedString);
+      end;
+      CloseFile(Log);
+      if MilliSecondsBetween(StrToTime(LastTimeLockedString), Time) > 10000 then
+      begin
+        ShowMessage('Login has been unlocked. Try again');
+        attempts := 0;
+      end;
     end;
   end
   else
-  begin
     ShowMessage('Too many attempts. Locked for 30 seconds');
-    if attempts = 3 then
-    begin
-      TimeFirstLocked := Time;
-      AssignFile(Log, 'C:\Users\habib\Documents\Computing\Coursework\Password Suite\log.txt');
-      append(log);
-      writeln(log, TimeToStr(TimeFirstLocked));
-      CloseFile(Log);
-    end;
-    AssignFile(Log, 'C:\Users\habib\Documents\Computing\Coursework\Password Suite\log.txt');
-    reset(log);
-    while not EOF(log) do
-    begin
-      readln(log, LastTimeLockedString);
-    end;
-    CloseFile(Log);
-    if MilliSecondsBetween(StrToTime(LastTimeLockedString), Time) > 3000 then
-        attempts := 0;
-    attempts := attempts + 1;
-  end;
 end;
 
 end.

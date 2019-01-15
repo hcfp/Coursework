@@ -1,102 +1,95 @@
 object FormManagerLogin: TFormManagerLogin
   Left = 0
-  Height = 500
+  Height = 333
   Top = 0
-  Width = 500
+  Width = 333
   ActiveControl = EditUsername
   Caption = 'Login to Manager'
-  ClientHeight = 500
-  ClientWidth = 500
-  DesignTimePPI = 144
+  ClientHeight = 333
+  ClientWidth = 333
   OnCreate = FormCreate
   Position = poDesktopCenter
-  LCLVersion = '1.8.4.0'
-  Visible = False
+  LCLVersion = '2.0.0.3'
   object EditUsername: TLabeledEdit
-    Left = 160
-    Height = 33
-    Top = 160
-    Width = 164
-    EditLabel.AnchorSideLeft.Control = EditUsername
-    EditLabel.AnchorSideRight.Control = EditUsername
-    EditLabel.AnchorSideRight.Side = asrBottom
-    EditLabel.AnchorSideBottom.Control = EditUsername
-    EditLabel.Left = 160
-    EditLabel.Height = 25
-    EditLabel.Top = 132
-    EditLabel.Width = 164
+    Left = 107
+    Height = 23
+    Top = 107
+    Width = 109
+    EditLabel.Height = 15
+    EditLabel.Width = 109
     EditLabel.Caption = 'Username'
     EditLabel.ParentColor = False
+    EditLabel.ParentFont = False
+    ParentFont = False
     TabOrder = 0
   end
   object EditPassword: TLabeledEdit
-    Left = 160
-    Height = 33
-    Top = 222
-    Width = 164
+    Left = 107
+    Height = 23
+    Top = 148
+    Width = 109
     EchoMode = emPassword
-    EditLabel.AnchorSideLeft.Control = EditPassword
-    EditLabel.AnchorSideRight.Control = EditPassword
-    EditLabel.AnchorSideRight.Side = asrBottom
-    EditLabel.AnchorSideBottom.Control = EditPassword
-    EditLabel.Left = 160
-    EditLabel.Height = 25
-    EditLabel.Top = 194
-    EditLabel.Width = 164
+    EditLabel.Height = 15
+    EditLabel.Width = 109
     EditLabel.Caption = 'Password'
     EditLabel.ParentColor = False
+    EditLabel.ParentFont = False
+    ParentFont = False
     PasswordChar = '*'
     TabOrder = 1
   end
   object ButtonLogin: TButton
-    Left = 249
-    Height = 25
-    Top = 256
-    Width = 75
+    Left = 166
+    Height = 17
+    Top = 171
+    Width = 50
     Caption = 'Login'
     OnClick = ButtonLoginClick
+    ParentFont = False
     TabOrder = 2
   end
   object CheckBoxPassword: TCheckBox
-    Left = 336
-    Height = 29
-    Top = 224
-    Width = 155
+    Left = 224
+    Height = 19
+    Top = 149
+    Width = 102
     Caption = 'Show Password'
     OnChange = CheckBoxPasswordChange
+    ParentFont = False
     TabOrder = 3
   end
   object ButtonNewUser: TButton
-    Left = 160
-    Height = 25
-    Top = 256
-    Width = 75
+    Left = 107
+    Height = 17
+    Top = 171
+    Width = 50
     Caption = 'Add User'
     OnClick = ButtonNewUserClick
+    ParentFont = False
     TabOrder = 4
   end
   object Conn: TSQLite3Connection
     Connected = False
     LoginPrompt = False
-    DatabaseName = 'C:\Users\habib\Documents\Computing\Coursework\Password Suite\PasswordSuite.db'
+    DatabaseName = 'C:\Users\habib\Documents\Everything\School\Computing\Coursework\Password Suite\PasswordSuite.db'
     KeepConnection = False
     Transaction = Trans
     HostName = 'localhost'
-    left = 40
-    top = 15
+    left = 27
+    top = 10
   end
   object Query: TSQLQuery
     FieldDefs = <>
     Database = Conn
     Transaction = Trans
     Params = <>
-    left = 144
-    top = 15
+    left = 96
+    top = 10
   end
   object Trans: TSQLTransaction
     Active = False
     Database = Conn
-    left = 240
-    top = 15
+    left = 160
+    top = 10
   end
 end
