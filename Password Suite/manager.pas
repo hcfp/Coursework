@@ -98,11 +98,17 @@ begin
 end;
 
 procedure TFormManager.QueryAfterPost();
+var
+  EntryID: string;
 begin
   try
     //applys edits and inserts made using dbgrid
-    showmessage('submitted');
     query.ApplyUpdates;
+    Trans.CommitRetaining;
+    EntryID := query.FieldByName('EntryID').AsString;
+    query.SQL.Text := 'UPDATE Manager SET UserID = ' + UserID +
+      ' WHERE EntryID = ' + EntryID;
+    query.ExecSQL;
     Trans.CommitRetaining;
   except
     on E: Exception do
@@ -157,7 +163,7 @@ begin
     K := S[(S[i] + S[j]) mod 256];
     key[i - 1] := K;               //if key was a certain length it would end
   end;                             //up trying to access key[0] which is an
-  Result := key;                     //invalid value. FIXED
+  Result := key;                   //invalid value. FIXED
 end;
 
 procedure setPlaintext;
