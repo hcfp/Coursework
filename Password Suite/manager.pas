@@ -26,7 +26,7 @@ type
     DBNavigator1: TDBNavigator;
     PageControl1: TPageControl;
     Conn: TSQLite3Connection;
-    TabSheet1: TTabSheet;
+    TabSheetEncrypt: TTabSheet;
     Trans: TSQLTransaction;
     TabSheetManager: TTabSheet;
     procedure ButtonConnectClick(Sender: TObject);
@@ -101,6 +101,7 @@ procedure TFormManager.QueryAfterPost();
 begin
   try
     //applys edits and inserts made using dbgrid
+    showmessage('submitted');
     query.ApplyUpdates;
     Trans.CommitRetaining;
   except
@@ -128,7 +129,7 @@ begin
     S[i] := S[j];
     S[j] := temp;
   end;
-  KSA := S;
+  Result := S;
 end;
 
 function PRGA(S: myArray; n: integer): dynamicArray;
@@ -156,7 +157,7 @@ begin
     K := S[(S[i] + S[j]) mod 256];
     key[i - 1] := K;               //if key was a certain length it would end
   end;                             //up trying to access key[0] which is an
-  PRGA := key;                     //invalid value. FIXED
+  Result := key;                     //invalid value. FIXED
 end;
 
 procedure setPlaintext;
@@ -186,7 +187,7 @@ begin
   cipherString := '';
   for i := 0 to High(cipher) do
     cipherString := cipherString + IntToHex(cipher[i], 2);
-  encrypt := cipherString;
+  Result := cipherString;
 end;
 
 function stringToHex(cipherString: string): dynamicArrayString;
@@ -207,7 +208,7 @@ begin
     i := i + 1;
     cipherString := rightstr(cipherString, length(cipherString) - 2);
   end;
-  stringToHex := DecryptArrayString;
+  Result := DecryptArrayString;
 end;
 
 function hexToDecimal(DecryptArrayString: dynamicArrayString): dynamicArray;
@@ -223,7 +224,7 @@ begin
     SetLength(DecryptArrayInt, sizeOfDecryptArrayInt);
     DecryptArrayInt[i] := Hex2Dec(DecryptArrayString[i]);
   end;
-  hexToDecimal := DecryptArrayInt;
+  Result := DecryptArrayInt;
 end;
 
 function decrypt(DecryptArrayInt: dynamicArray): string;
@@ -248,7 +249,7 @@ begin
   // Turns array of integers into the plaintext string
   for i := 0 to high(Decrypted) do
     decryptedString := decryptedString + chr(Decrypted[i]);
-  decrypt := decryptedString;
+  Result := decryptedString;
 end;
 
 procedure TFormManager.ButtonEncryptClick(Sender: TObject);
