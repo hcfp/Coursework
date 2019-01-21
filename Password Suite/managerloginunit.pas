@@ -62,6 +62,17 @@ begin
   Result := IntToHex(hashNum, 8);
 end;
 
+function generateSalt: string;
+var
+  i: integer;
+  salt: string;
+begin
+  salt := '';
+  for i := 0 to random(5) + 5 do
+    salt := salt + chr(random(93) + 33);
+  Result := salt;
+end;
+
 //Clears login details for when login screen is accessed again
 procedure resetConnection;
 begin
@@ -76,11 +87,11 @@ begin
   FormManager.Conn.Close;
   FormManager.Trans.EndTransaction;
   FormManager.Query.Close;
-  attempts := 0;
 end;
 
 procedure TFormManagerLogin.FormCreate(Sender: TObject);
 begin
+  randomize;
   conn.Close; // Ensure the connection is closed at start start
   try
     // Since we're making this database for the first time,
@@ -94,7 +105,7 @@ begin
         //creates the LoginInformation table
         conn.ExecuteDirect('CREATE TABLE `LoginInformation` ( ' +
           '"UserID" INTEGER PRIMARY KEY ,' + '"Username" VARCHAR(50),' +
-          '"Password" VARCHAR(50));');
+          '"Password" VARCHAR(50) , "Salt" VARCHAR(10));');
         trans.Commit;
         //creates the Manager table
         conn.ExecuteDirect('CREATE TABLE "Manager" (' +
@@ -127,7 +138,7 @@ end;
 
 procedure TFormManagerLogin.ButtonNewUserClick(Sender: TObject);
 var
-  username, password: string;
+  username, password, generatedSalt: string;
 begin
   username := EditUsername.Text;
   password := EditPassword.Text;
@@ -139,12 +150,15 @@ begin
   begin
     // formats strings to fit in the sql query string
     username := '"' + username + '"';
+    generatedSalt := generateSalt;
+    password := password + generatedSalt;
     password := ELFHash(password);
     password := '"' + password + '"';
+    generatedSalt := '"' + generatedSalt + '"';
     //UserID value is null since it is an auto-incremented field
     conn.ExecuteDirect(
-      'INSERT INTO LoginInformation (UserID,Username, Password) VALUES (NULL,' +
-      username + ',' + password + ');');
+      'INSERT INTO LoginInformation (UserID, Username, Password, Salt) VALUES (NULL,' +
+      username + ',' + password + ',' + generatedSalt + ');');
     trans.Commit;
     Conn.Close;
     ShowMessage('Added to DB');
@@ -155,12 +169,11 @@ end;
 
 procedure TFormManagerLogin.ButtonLoginClick(Sender: TObject);
 var
-  EnteredUsername, EnteredPassword, Password: string;
+  EnteredUsername, EnteredPassword, Password, SaltFromDB: string;
 begin
   query.Close;
   EnteredUsername := EditUsername.Text;
   EnteredPassword := EditPassword.Text;
-  EnteredPassword := ELFHash(EnteredPassword);
   AssignFile(Log, 'log.txt');
   reset(log);
   while not EOF(log) do
@@ -175,17 +188,21 @@ begin
     begin
       Query.SQL.Clear;
       //gets the password associated with the inputted username
-      Query.SQL.Text := 'SELECT UserId, Password FROM LoginInformation WHERE Username = '
-        + '"' + EnteredUsername + '"';
+      Query.SQL.Text :=
+        'SELECT UserId, Password, Salt FROM LoginInformation WHERE Username = ' +
+        '"' + EnteredUsername + '"';
       Query.Open;
       //extracts the password from the query
       Password := Query.FieldByName('Password').AsString;
       UserID := Query.FieldByName('UserID').AsString;
+      SaltFromDB := Query.FieldByName('Salt').AsString;
+      EnteredPassword := ELFHash(EnteredPassword + SaltFromDB);
       //if the password entered by the user is the same as the password fetched
       //from the databased corresponding to the username, the login is successful
       if Password = EnteredPassword then
       begin
         resetConnection;
+        attempts := 0;
         EnteredUsername := '';
         EnteredPassword := '';
       end
