@@ -105,6 +105,8 @@ begin
     //applys edits and inserts made using dbgrid
     query.ApplyUpdates;
     Trans.CommitRetaining;
+    //ensures that the UserID added to the database is correct
+    //without this, the user can make entries for other users
     EntryID := query.FieldByName('EntryID').AsString;
     query.SQL.Text := 'UPDATE Manager SET UserID = ' + UserID +
       ' WHERE EntryID = ' + EntryID;
@@ -161,9 +163,9 @@ begin
     S[i] := S[j];
     S[j] := temp;
     K := S[(S[i] + S[j]) mod 256];
-    key[i - 1] := K;               //if key was a certain length it would end
-  end;                             //up trying to access key[0] which is an
-  Result := key;                   //invalid value. FIXED
+    key[i - 1] := K;            
+  end;                          
+  Result := key;                   
 end;
 
 procedure setPlaintext;

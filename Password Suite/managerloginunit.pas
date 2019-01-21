@@ -36,7 +36,6 @@ var
   UserID, LastTimeLockedString: string;
   attempts: integer;
   TimeFirstLocked: TDateTime;
-  log: TextFile;
 
 implementation
 
@@ -46,7 +45,8 @@ implementation
 
 function ELFHash(password: string): string;
 var
-  i, x, hashNum: cardinal; // cardinal cannot be negative unlike integer
+  //cardinal cannot be negative unlike integer
+  i, x, hashNum: cardinal; 
 begin
   hashNum := 0;
   for i := 1 to length(password) do
@@ -68,7 +68,8 @@ var
   salt: string;
 begin
   salt := '';
-  for i := 0 to random(5) + 5 do
+  //generates a 5-10 length string consisting of ascii characters in a range
+  for i := 0 to (random(5) + 5) do
     salt := salt + chr(random(93) + 33);
   Result := salt;
 end;
@@ -76,14 +77,20 @@ end;
 //Clears login details for when login screen is accessed again
 procedure resetConnection;
 begin
+  //Close connection in the login form
   FormManagerLogin.Conn.Close;
   FormManagerLogin.Trans.EndTransaction;
   FormManagerLogin.Query.Close;
+  //clear edits for next user
   FormManagerLogin.EditUsername.Text := '';
   FormManagerLogin.EditPassword.Text := '';
+  //Hides the login form
   FormManagerLogin.Hide;
+  //shows the manager
   FormManager.ShowModal;
+  //Shows the login form when the manager is exited
   FormManagerLogin.Show;
+  //ensures all connections are close
   FormManager.Conn.Close;
   FormManager.Trans.EndTransaction;
   FormManager.Query.Close;
@@ -148,11 +155,13 @@ begin
   Query.Open;
   if Query.FieldByName('Username').AsString = '' then
   begin
+    generatedSalt := generateSalt;
+    //appends salt to password string
+    password := password + generatedSalt;
+    //hash password
+    password := ELFHash(password);
     // formats strings to fit in the sql query string
     username := '"' + username + '"';
-    generatedSalt := generateSalt;
-    password := password + generatedSalt;
-    password := ELFHash(password);
     password := '"' + password + '"';
     generatedSalt := '"' + generatedSalt + '"';
     //UserID value is null since it is an auto-incremented field
@@ -170,6 +179,7 @@ end;
 procedure TFormManagerLogin.ButtonLoginClick(Sender: TObject);
 var
   EnteredUsername, EnteredPassword, Password, SaltFromDB: string;
+  log: TextFile;
 begin
   query.Close;
   EnteredUsername := EditUsername.Text;
@@ -181,6 +191,7 @@ begin
     readln(log, LastTimeLockedString);
   end;
   CloseFile(Log);
+  //if it has been more than 30 seconds since the file was last locked
   if MilliSecondsBetween(StrToTime(LastTimeLockedString), Time) > 30000 then
   begin
     attempts := attempts + 1;
@@ -211,8 +222,10 @@ begin
     end
     else
     begin
+      //if it is the first time that the user has exceeded the max attemps
       if attempts = 3 then
       begin
+        //add the current time to the log file
         TimeFirstLocked := Time;
         AssignFile(Log, 'log.txt');
         append(log);
@@ -220,6 +233,7 @@ begin
         CloseFile(Log);
         ShowMessage('Too many attempts. Locked for 30 seconds');
       end;
+      //if the user has already failed, check if the time has been exceeded
       if attempts > 3 then
       begin
         AssignFile(Log, 'log.txt');
