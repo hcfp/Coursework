@@ -38,7 +38,7 @@ type
 var
   FormTester: TFormTester;
   re: TRegExpr;
-  count: integer;
+  Count: integer;
   password: string;
   meetsLength, hasDigits, hasLower, hasUpper, hasSpecial: boolean;
 
@@ -52,7 +52,7 @@ procedure TFormTester.EditPasswordChange(Sender: TObject);
 begin
   meetsLength := False;
   re := TRegExpr.Create;
-  count := 0;
+  Count := 0;
   password := EditPassword.Text;
 
   //Test for password length
@@ -122,16 +122,16 @@ begin
 
   //allows dynmaic updates. Recalculated based on each change
   if hasDigits then
-    count := count + 1;
+    Count := Count + 1;
   if hasLower then
-    count := count + 1;
+    Count := Count + 1;
   if hasUpper then
-    count := count + 1;
+    Count := Count + 1;
   if hasSpecial then
-    count := count + 1;
+    Count := Count + 1;
 
   //Has to be greater than 7 characters and pass 3 or more of the tests
-  if (meetsLength) and (count >= 3) then
+  if (meetsLength) and (Count >= 3) then
   begin
     TextPassFail.Caption := 'Pass';
     TextPassFail.Font.Color := clLime;
@@ -142,12 +142,12 @@ begin
     TextPassFail.Font.Color := clRed;
   end;
   //reset to allow recalulation based on changes
-  count := 0;
+  Count := 0;
 end;
 
 procedure TFormTester.ButtonTestWordsClick(Sender: TObject);
 var
-  searchArray : array of string;
+  searchArray: array of string;
   i, high, low, mid, maxLength: integer;
   found, exists: boolean;
   temp, searchItem, currentSearchItem: string;
