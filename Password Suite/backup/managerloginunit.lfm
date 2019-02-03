@@ -7,12 +7,13 @@ object FormManagerLogin: TFormManagerLogin
   Caption = 'Login to Manager'
   ClientHeight = 242
   ClientWidth = 281
+  DesignTimePPI = 144
   OnCreate = FormCreate
   Position = poDesktopCenter
-  LCLVersion = '1.8.4.0'
+  Visible = False
   object EditUsername: TLabeledEdit
     Left = 48
-    Height = 23
+    Height = 33
     Top = 71
     Width = 137
     EditLabel.AnchorSideLeft.Control = EditUsername
@@ -20,8 +21,8 @@ object FormManagerLogin: TFormManagerLogin
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = EditUsername
     EditLabel.Left = 48
-    EditLabel.Height = 15
-    EditLabel.Top = 53
+    EditLabel.Height = 25
+    EditLabel.Top = 43
     EditLabel.Width = 137
     EditLabel.Caption = 'Username'
     EditLabel.ParentColor = False
@@ -31,7 +32,7 @@ object FormManagerLogin: TFormManagerLogin
   end
   object EditPassword: TLabeledEdit
     Left = 48
-    Height = 23
+    Height = 33
     Top = 112
     Width = 121
     EchoMode = emPassword
@@ -40,8 +41,8 @@ object FormManagerLogin: TFormManagerLogin
     EditLabel.AnchorSideRight.Side = asrBottom
     EditLabel.AnchorSideBottom.Control = EditPassword
     EditLabel.Left = 48
-    EditLabel.Height = 15
-    EditLabel.Top = 94
+    EditLabel.Height = 25
+    EditLabel.Top = 84
     EditLabel.Width = 121
     EditLabel.Caption = 'Password'
     EditLabel.ParentColor = False
@@ -62,9 +63,9 @@ object FormManagerLogin: TFormManagerLogin
   end
   object CheckBoxPassword: TCheckBox
     Left = 176
-    Height = 19
+    Height = 29
     Top = 112
-    Width = 102
+    Width = 155
     Caption = 'Show Password'
     OnChange = CheckBoxPasswordChange
     ParentFont = False
@@ -83,7 +84,7 @@ object FormManagerLogin: TFormManagerLogin
   object Conn: TSQLite3Connection
     Connected = False
     LoginPrompt = False
-    DatabaseName = 'C:\Habib\Password Suite\PasswordSuite.db'
+    DatabaseName = 'C:\Users\habib\Documents\Computing\Coursework\Password Suite\PasswordSuite.db'
     KeepConnection = False
     Transaction = Trans
     HostName = 'localhost'

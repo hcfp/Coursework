@@ -157,35 +157,40 @@ var
 begin
   username := EditUsername.Text;
   password := EditPassword.Text;
-  Query.Close;
-  Query.SQL.Text := 'SELECT Username FROM LoginInformation WHERE Username = ' +
-    '"' + username + '"';
-  Query.Open;
-  if Query.FieldByName('Username').AsString = '' then
+  if length(password) >= 8 then
   begin
-    generatedSalt := generateSalt;
-    //appends salt to password string
-    password := password + generatedSalt;
-    //hash password
-    password := ELFHash(password);
-    // formats strings to fit in the sql query string
-    username := '"' + username + '"';
-    password := '"' + password + '"';
-    generatedSalt := '"' + generatedSalt + '"';
-    //UserID value is null since it is an auto-incremented field
-    try
-      conn.ExecuteDirect(
-        'INSERT INTO LoginInformation (UserID, Username, Password, Salt) VALUES (NULL,' +
-        username + ',' + password + ',' + generatedSalt + ');');
-      trans.Commit;
-      Conn.Close;
-      ShowMessage('User created');
-    except
-      ShowMessage('Unable to add user to the database')
-    end;
+    Query.Close;
+    Query.SQL.Text := 'SELECT Username FROM LoginInformation WHERE Username = ' +
+      '"' + username + '"';
+    Query.Open;
+    if Query.FieldByName('Username').AsString = '' then
+    begin
+      generatedSalt := generateSalt;
+      //appends salt to password string
+      password := password + generatedSalt;
+      //hash password
+      password := ELFHash(password);
+      // formats strings to fit in the sql query string
+      username := '"' + username + '"';
+      password := '"' + password + '"';
+      generatedSalt := '"' + generatedSalt + '"';
+      //UserID value is null since it is an auto-incremented field
+      try
+        conn.ExecuteDirect(
+          'INSERT INTO LoginInformation (UserID, Username, Password, Salt) VALUES (NULL,' +
+          username + ',' + password + ',' + generatedSalt + ');');
+        trans.Commit;
+        Conn.Close;
+        ShowMessage('User created');
+      except
+        ShowMessage('Unable to add user to the database')
+      end;
+    end
+    else
+      ShowMessage('Username not available');
   end
   else
-    ShowMessage('Username not available');
+    ShowMessage('Password must be 8 characters or longer. Use the password words generator to create a strong password');
 end;
 
 procedure TFormManagerLogin.ButtonLoginClick(Sender: TObject);
