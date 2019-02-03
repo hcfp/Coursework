@@ -73,15 +73,19 @@ procedure TFormManager.ButtonConnectClick(Sender: TObject);
 var
   i: integer;
 begin
-  conn.Open;
-  query.Close;
-  //the sql query displayed in dbgrid
-  query.sql.Text := ('SELECT * FROM Manager WHERE UserID = ' + UserID);
-  query.Open;
-  query.active := True;
-  //makes the collums smaller than the defualt
-  for i := 0 to grid.Columns.Count - 1 do
-    grid.Columns.Items[i].Width := 90;
+  try
+    conn.Open;
+    query.Close;
+    //the sql query displayed in dbgrid
+    query.sql.Text := ('SELECT * FROM Manager WHERE UserID = ' + UserID);
+    query.Open;
+    query.active := True;
+    //makes the collums smaller than the defualt
+    for i := 0 to grid.Columns.Count - 1 do
+      grid.Columns.Items[i].Width := 90;
+  except
+    ShowMessage('Could not connect to database');
+  end;
 end;
 
 //applys edits, edits and deletions made using dbgrid

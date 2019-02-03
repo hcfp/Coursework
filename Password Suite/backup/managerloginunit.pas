@@ -46,7 +46,7 @@ implementation
 function ELFHash(password: string): string;
 var
   //cardinal cannot be negative unlike integer
-  i, x, hashNum: cardinal; 
+  i, x, hashNum: cardinal;
 begin
   hashNum := 0;
   for i := 1 to length(password) do
@@ -84,6 +84,10 @@ begin
   //clear edits for next user
   FormManagerLogin.EditUsername.Text := '';
   FormManagerLogin.EditPassword.Text := '';
+  FormManager.EditCiphertext.Text := '';
+  FormManager.EditOutputCiphertext.Text := '';
+  FormManager.EditPlaintext.Text := '';
+  FormManager.EditOutputPlaintext.Text := '';
   //Hides the login form
   FormManagerLogin.Hide;
   //shows the manager
@@ -91,9 +95,13 @@ begin
   //Shows the login form when the manager is exited
   FormManagerLogin.Show;
   //ensures all connections are close
-  FormManager.Conn.Close;
-  FormManager.Trans.EndTransaction;
-  FormManager.Query.Close;
+  try
+    FormManager.Conn.Close;
+    FormManager.Trans.EndTransaction;
+    FormManager.Query.Close;
+  except
+    ShowMessage('Could not close manager table');
+  end;
 end;
 
 procedure TFormManagerLogin.FormCreate(Sender: TObject);
@@ -165,12 +173,16 @@ begin
     password := '"' + password + '"';
     generatedSalt := '"' + generatedSalt + '"';
     //UserID value is null since it is an auto-incremented field
-    conn.ExecuteDirect(
-      'INSERT INTO LoginInformation (UserID, Username, Password, Salt) VALUES (NULL,' +
-      username + ',' + password + ',' + generatedSalt + ');');
-    trans.Commit;
-    Conn.Close;
-    ShowMessage('Added to DB');
+    try
+      conn.ExecuteDirect(
+        'INSERT INTO LoginInformation (UserID, Username, Password, Salt) VALUES (NULL,' +
+        username + ',' + password + ',' + generatedSalt + ');');
+      trans.Commit;
+      Conn.Close;
+      ShowMessage('User created');
+    except
+      ShowMessage('Unable to add user to the database')
+    end;
   end
   else
     ShowMessage('Username not available');
@@ -184,11 +196,19 @@ begin
   query.Close;
   EnteredUsername := EditUsername.Text;
   EnteredPassword := EditPassword.Text;
-  AssignFile(Log, 'log.txt');
-  reset(log);
-  while not EOF(log) do
-  begin
-    readln(log, LastTimeLockedString);
+  try
+    AssignFile(Log, 'log.txt');
+    reset(log);
+  except
+    ShowMessage('Unable to open log file.');
+  end;
+  try
+    while not EOF(log) do
+    begin
+      readln(log, LastTimeLockedString);
+    end;
+  except
+    ShowMessage('Unable to read from file');
   end;
   CloseFile(Log);
   //if it has been more than 30 seconds since the file was last locked
@@ -197,19 +217,23 @@ begin
     attempts := attempts + 1;
     if attempts < 3 then
     begin
-      Query.SQL.Clear;
-      //gets the password associated with the inputted username
-      Query.SQL.Text :=
-        'SELECT UserId, Password, Salt FROM LoginInformation WHERE Username = ' +
-        '"' + EnteredUsername + '"';
-      Query.Open;
-      //extracts the password from the query
-      Password := Query.FieldByName('Password').AsString;
-      UserID := Query.FieldByName('UserID').AsString;
-      SaltFromDB := Query.FieldByName('Salt').AsString;
-      EnteredPassword := ELFHash(EnteredPassword + SaltFromDB);
-      //if the password entered by the user is the same as the password fetched
-      //from the databased corresponding to the username, the login is successful
+      try
+        Query.SQL.Clear;
+        //gets the password associated with the inputted username
+        Query.SQL.Text :=
+          'SELECT UserId, Password, Salt FROM LoginInformation WHERE Username = ' +
+          '"' + EnteredUsername + '"';
+        Query.Open;
+        //extracts the password from the query
+        Password := Query.FieldByName('Password').AsString;
+        UserID := Query.FieldByName('UserID').AsString;
+        SaltFromDB := Query.FieldByName('Salt').AsString;
+        EnteredPassword := ELFHash(EnteredPassword + SaltFromDB);
+        //if the password entered by the user is the same as the password fetched
+        //from the databased corresponding to the username, the login is successful
+      except
+        ShowMessage('Unable to get username and password');
+      end;
       if Password = EnteredPassword then
       begin
         resetConnection;
@@ -227,15 +251,20 @@ begin
       begin
         //add the current time to the log file
         TimeFirstLocked := Time;
-        AssignFile(Log, 'log.txt');
-        append(log);
-        writeln(log, TimeToStr(TimeFirstLocked));
-        CloseFile(Log);
+        try
+          AssignFile(Log, 'log.txt');
+          append(log);
+          writeln(log, TimeToStr(TimeFirstLocked));
+          CloseFile(Log);
+        except
+          ShowMessage('Unable to read log');
+        end;
         ShowMessage('Too many attempts. Locked for 30 seconds');
       end;
       //if the user has already failed, check if the time has been exceeded
       if attempts > 3 then
       begin
+        try
         AssignFile(Log, 'log.txt');
         reset(log);
         while not EOF(log) do
@@ -243,6 +272,9 @@ begin
           readln(log, LastTimeLockedString);
         end;
         CloseFile(Log);
+        except
+          ShowMessage('Unable to read from log');
+        end;
         if MilliSecondsBetween(StrToTime(LastTimeLockedString), Time) > 30000 then
         begin
           ShowMessage('Login has been unlocked. Try again');

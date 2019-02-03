@@ -25,8 +25,8 @@ type
     TextPassDigits: TStaticText;
     TextPassSpecial: TStaticText;
     TextPassFail: TStaticText;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
+    TabSheetWordList: TTabSheet;
+    TabSheetRequirements: TTabSheet;
     procedure ButtonTestWordsClick(Sender: TObject);
     procedure EditPasswordChange(Sender: TObject);
   private
@@ -37,10 +37,6 @@ type
 
 var
   FormTester: TFormTester;
-  re: TRegExpr;
-  Count: integer;
-  password: string;
-  meetsLength, hasDigits, hasLower, hasUpper, hasSpecial: boolean;
 
 implementation
 
@@ -49,6 +45,11 @@ implementation
 { TFormTester }
 
 procedure TFormTester.EditPasswordChange(Sender: TObject);
+var
+  password: string;
+  re: TRegExpr;
+  meetsLength, hasDigits, hasLower, hasUpper, hasSpecial: boolean;
+  Count: integer;
 begin
   meetsLength := False;
   re := TRegExpr.Create;

@@ -1,27 +1,25 @@
 object FormGen: TFormGen
-  Left = 0
-  Height = 500
-  Top = 0
-  Width = 500
+  Left = 441
+  Height = 379
+  Top = 118
+  Width = 450
   ActiveControl = PageControl1
   Caption = 'Generator'
-  ClientHeight = 500
-  ClientWidth = 500
-  DesignTimePPI = 144
+  ClientHeight = 379
+  ClientWidth = 450
   Position = poDesktopCenter
   LCLVersion = '1.8.4.0'
-  Visible = False
   object PageControl1: TPageControl
     Left = 0
     Height = 500
     Top = 0
     Width = 500
-    ActivePage = TabSheet1
-    TabIndex = 0
+    ActivePage = TabSheetRandGen
+    TabIndex = 1
     TabOrder = 0
-    object TabSheet1: TTabSheet
+    object TabSheetWordGen: TTabSheet
       Caption = 'Word Based'
-      ClientHeight = 462
+      ClientHeight = 472
       ClientWidth = 492
       object ButtonGenWords: TButton
         Left = 181
@@ -34,7 +32,7 @@ object FormGen: TFormGen
       end
       object EditOutputWords: TLabeledEdit
         Left = 96
-        Height = 33
+        Height = 23
         Top = 176
         Width = 283
         EditLabel.AnchorSideLeft.Control = EditOutputWords
@@ -42,8 +40,8 @@ object FormGen: TFormGen
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = EditOutputWords
         EditLabel.Left = 96
-        EditLabel.Height = 25
-        EditLabel.Top = 148
+        EditLabel.Height = 15
+        EditLabel.Top = 158
         EditLabel.Width = 283
         EditLabel.Caption = 'Generated password'
         EditLabel.ParentColor = False
@@ -51,14 +49,14 @@ object FormGen: TFormGen
       end
       object SpinEditNumOfWords: TSpinEdit
         Left = 200
-        Height = 33
+        Height = 23
         Top = 96
         Width = 75
         TabOrder = 2
       end
       object FileNameEditWordList: TFileNameEdit
         Left = 72
-        Height = 33
+        Height = 23
         Top = 48
         Width = 331
         FilterIndex = 0
@@ -70,104 +68,112 @@ object FormGen: TFormGen
       end
       object LabelWords: TLabel
         Left = 126
-        Height = 25
+        Height = 15
         Top = 12
-        Width = 222
+        Width = 147
         Caption = 'Locate list of random words'
         ParentColor = False
       end
     end
-    object TabSheet2: TTabSheet
+    object TabSheetRandGen: TTabSheet
       Caption = 'Random'
-      ClientHeight = 462
+      ClientHeight = 472
       ClientWidth = 492
-      object Label1: TLabel
+      object LabelLength: TLabel
         Left = 191
-        Height = 25
-        Top = 64
-        Width = 54
+        Height = 15
+        Top = 8
+        Width = 37
         Caption = 'Length'
         ParentColor = False
       end
       object SpinEditLength: TSpinEdit
         Left = 184
-        Height = 33
-        Top = 88
+        Height = 23
+        Top = 32
         Width = 60
         MinValue = 8
         TabOrder = 0
         Value = 8
       end
       object SpinEditDigits: TSpinEdit
-        Left = 73
-        Height = 33
-        Top = 152
+        Left = 72
+        Height = 23
+        Top = 96
         Width = 60
         TabOrder = 1
       end
       object SpinEditSpecial: TSpinEdit
-        Left = 303
-        Height = 33
-        Top = 152
+        Left = 302
+        Height = 23
+        Top = 96
         Width = 60
         TabOrder = 2
       end
       object SpinEditCaps: TSpinEdit
-        Left = 188
-        Height = 33
-        Top = 152
+        Left = 187
+        Height = 23
+        Top = 96
         Width = 60
         TabOrder = 3
       end
       object LabelDigits: TLabel
-        Left = 83
-        Height = 25
-        Top = 129
-        Width = 46
+        Left = 72
+        Height = 15
+        Top = 72
+        Width = 30
         Caption = 'Digits'
         ParentColor = False
       end
-      object Label3: TLabel
-        Left = 176
-        Height = 25
-        Top = 128
-        Width = 107
+      object LabelCaps: TLabel
+        Left = 185
+        Height = 15
+        Top = 72
+        Width = 72
         Caption = 'Captial letters'
         ParentColor = False
       end
       object LabelSpecial: TLabel
-        Left = 310
-        Height = 25
-        Top = 129
-        Width = 55
+        Left = 309
+        Height = 15
+        Top = 80
+        Width = 37
         Caption = 'Special'
         ParentColor = False
       end
       object ButtonGenRandom: TButton
-        Left = 176
+        Left = 192
         Height = 25
-        Top = 207
+        Top = 152
         Width = 75
         Caption = 'Generate'
         OnClick = ButtonGenRandomClick
         TabOrder = 4
       end
       object EditOutput: TLabeledEdit
-        Left = 144
-        Height = 33
-        Top = 280
-        Width = 135
+        Left = 128
+        Height = 23
+        Top = 208
+        Width = 202
         EditLabel.AnchorSideLeft.Control = EditOutput
         EditLabel.AnchorSideRight.Control = EditOutput
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = EditOutput
-        EditLabel.Left = 144
-        EditLabel.Height = 25
-        EditLabel.Top = 252
-        EditLabel.Width = 135
+        EditLabel.Left = 128
+        EditLabel.Height = 15
+        EditLabel.Top = 190
+        EditLabel.Width = 202
         EditLabel.Caption = 'Generated password'
         EditLabel.ParentColor = False
         TabOrder = 5
+      end
+      object LabelRandom: TLabel
+        Left = 72
+        Height = 15
+        Top = 128
+        Width = 342
+        Caption = 'Set Digits and Capital letters and Special to to 0 for random result'
+        ParentColor = False
       end
     end
   end

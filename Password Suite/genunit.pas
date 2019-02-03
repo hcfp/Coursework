@@ -16,10 +16,11 @@ type
     ButtonGenWords: TButton;
     ButtonGenRandom: TButton;
     FileNameEditWordList: TFileNameEdit;
-    Label1: TLabel;
+    LabelLength: TLabel;
+    LabelRandom: TLabel;
     LabelWords: TLabel;
     LabelDigits: TLabel;
-    Label3: TLabel;
+    LabelCaps: TLabel;
     EditOutput: TLabeledEdit;
     EditOutputWords: TLabeledEdit;
     LabelSpecial: TLabel;
@@ -29,8 +30,8 @@ type
     SpinEditDigits: TSpinEdit;
     SpinEditSpecial: TSpinEdit;
     SpinEditCaps: TSpinEdit;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
+    TabSheetWordGen: TTabSheet;
+    TabSheetRandGen: TTabSheet;
     procedure ButtonGenRandomClick(Sender: TObject);
     procedure ButtonGenWordsClick(Sender: TObject);
   private
