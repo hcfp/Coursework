@@ -182,6 +182,8 @@ begin
         trans.Commit;
         Conn.Close;
         ShowMessage('User created');
+        EditUsername.Text := '';
+        EditPassword.Text := '';
       except
         ShowMessage('Unable to add user to the database')
       end;

@@ -7,9 +7,10 @@ object FormManager: TFormManager
   Caption = 'Manager'
   ClientHeight = 350
   ClientWidth = 650
+  DesignTimePPI = 144
   OnCreate = FormCreate
   Position = poDesktopCenter
-  LCLVersion = '1.8.4.0'
+  Visible = False
   object PageControl1: TPageControl
     Left = 0
     Height = 350
@@ -21,7 +22,7 @@ object FormManager: TFormManager
     TabOrder = 0
     object TabSheetManager: TTabSheet
       Caption = 'Password Manager'
-      ClientHeight = 322
+      ClientHeight = 312
       ClientWidth = 642
       ParentFont = False
       object DBNavigator1: TDBNavigator
@@ -171,7 +172,7 @@ object FormManager: TFormManager
   object Conn: TSQLite3Connection
     Connected = False
     LoginPrompt = False
-    DatabaseName = 'C:\Habib\Password Suite\PasswordSuite.db'
+    DatabaseName = 'PasswordSuite.db'
     KeepConnection = False
     Transaction = Trans
     left = 78

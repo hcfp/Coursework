@@ -172,7 +172,7 @@ object FormManager: TFormManager
   object Conn: TSQLite3Connection
     Connected = False
     LoginPrompt = False
-    DatabaseName = 'C:\Users\habib\Documents\Computing\Coursework\Password Suite\PasswordSuite.db'
+    DatabaseName = 'PasswordSuite.db'
     KeepConnection = False
     Transaction = Trans
     left = 78

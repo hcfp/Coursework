@@ -7,23 +7,24 @@ object FormTester: TFormTester
   Caption = 'Tester'
   ClientHeight = 500
   ClientWidth = 500
+  DesignTimePPI = 144
   Position = poDesktopCenter
-  LCLVersion = '1.8.4.0'
+  Visible = False
   object PageControl1: TPageControl
     Left = 0
     Height = 500
     Top = 0
     Width = 500
-    ActivePage = TabSheetRequirements
-    TabIndex = 1
+    ActivePage = TabSheetWordList
+    TabIndex = 0
     TabOrder = 0
     object TabSheetWordList: TTabSheet
       Caption = 'Word List Test'
-      ClientHeight = 472
+      ClientHeight = 462
       ClientWidth = 492
       object FileNameEditGetPass: TFileNameEdit
         Left = 16
-        Height = 23
+        Height = 33
         Top = 72
         Width = 447
         FilterIndex = 0
@@ -35,7 +36,7 @@ object FormTester: TFormTester
       end
       object EditGetPass: TLabeledEdit
         Left = 16
-        Height = 23
+        Height = 33
         Top = 152
         Width = 424
         EditLabel.AnchorSideLeft.Control = EditGetPass
@@ -43,8 +44,8 @@ object FormTester: TFormTester
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = EditGetPass
         EditLabel.Left = 16
-        EditLabel.Height = 15
-        EditLabel.Top = 134
+        EditLabel.Height = 25
+        EditLabel.Top = 124
         EditLabel.Width = 424
         EditLabel.Caption = 'Enter password to be tested'
         EditLabel.ParentColor = False
@@ -52,9 +53,9 @@ object FormTester: TFormTester
       end
       object LabelWordList: TLabel
         Left = 16
-        Height = 15
-        Top = 55
-        Width = 80
+        Height = 25
+        Top = 48
+        Width = 119
         Caption = 'Locate wordlist'
         ParentColor = False
       end
@@ -70,11 +71,11 @@ object FormTester: TFormTester
     end
     object TabSheetRequirements: TTabSheet
       Caption = 'Requirements Test'
-      ClientHeight = 472
+      ClientHeight = 462
       ClientWidth = 492
       object EditPassword: TLabeledEdit
         Left = 80
-        Height = 23
+        Height = 33
         Top = 96
         Width = 265
         EditLabel.AnchorSideLeft.Control = EditPassword
@@ -82,8 +83,8 @@ object FormTester: TFormTester
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = EditPassword
         EditLabel.Left = 80
-        EditLabel.Height = 15
-        EditLabel.Top = 78
+        EditLabel.Height = 25
+        EditLabel.Top = 68
         EditLabel.Width = 265
         EditLabel.Caption = 'Enter password to be tested'
         EditLabel.ParentColor = False
@@ -137,6 +138,15 @@ object FormTester: TFormTester
         Width = 25
         Caption = 'Fail'
         TabOrder = 6
+      end
+      object Button1: TButton
+        Left = 168
+        Height = 38
+        Top = 320
+        Width = 113
+        Caption = 'Get tips'
+        OnClick = Button1Click
+        TabOrder = 7
       end
     end
   end

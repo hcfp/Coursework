@@ -10,7 +10,6 @@ object FormManagerLogin: TFormManagerLogin
   DesignTimePPI = 144
   OnCreate = FormCreate
   Position = poDesktopCenter
-  LCLVersion = '1.8.4.0'
   Visible = False
   object EditUsername: TLabeledEdit
     Left = 48
@@ -85,7 +84,7 @@ object FormManagerLogin: TFormManagerLogin
   object Conn: TSQLite3Connection
     Connected = False
     LoginPrompt = False
-    DatabaseName = 'C:\Users\habib\Documents\Computing\Coursework\Password Suite\PasswordSuite.db'
+    DatabaseName = 'PasswordSuite.db'
     KeepConnection = False
     Transaction = Trans
     HostName = 'localhost'

@@ -116,6 +116,7 @@ begin
       // Create the database and the tables
       try
         conn.Open;
+        conn.Password := 'test';
         Trans.StartTransaction;
         //creates the LoginInformation table
         conn.ExecuteDirect('CREATE TABLE `LoginInformation` ( ' +
@@ -157,7 +158,7 @@ var
 begin
   username := EditUsername.Text;
   password := EditPassword.Text;
-  if length password >= 8 then
+  if length(password) >= 8 then
   begin
     Query.Close;
     Query.SQL.Text := 'SELECT Username FROM LoginInformation WHERE Username = ' +
@@ -182,6 +183,8 @@ begin
         trans.Commit;
         Conn.Close;
         ShowMessage('User created');
+        EditUsername.Text := '';
+        EditPassword.Text := '';
       except
         ShowMessage('Unable to add user to the database')
       end;
