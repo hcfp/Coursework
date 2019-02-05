@@ -157,7 +157,7 @@ var
 begin
   username := EditUsername.Text;
   password := EditPassword.Text;
-  if length(password) >= 8 then
+  if (length(password) >= 8) and (username <> '')then
   begin
     Query.Close;
     Query.SQL.Text := 'SELECT Username FROM LoginInformation WHERE Username = ' +

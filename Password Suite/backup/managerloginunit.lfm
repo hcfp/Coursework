@@ -10,7 +10,6 @@ object FormManagerLogin: TFormManagerLogin
   DesignTimePPI = 144
   OnCreate = FormCreate
   Position = poDesktopCenter
-  LCLVersion = '1.8.4.0'
   Visible = False
   object EditUsername: TLabeledEdit
     Left = 48

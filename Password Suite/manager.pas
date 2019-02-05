@@ -33,6 +33,7 @@ type
     procedure ButtonDecryptClick(Sender: TObject);
     procedure ButtonEncryptClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure QueryAfterDelete();
     procedure QueryAfterPost();
   private
@@ -67,6 +68,23 @@ procedure TFormManager.FormCreate(Sender: TObject);
 begin
   //This stops a crash when pressing tab whilst in a dbgrid field
   Grid.AllowOutboundEvents := False;
+end;
+
+procedure TFormManager.FormShow(Sender: TObject);
+var
+  salt : string;
+begin
+  key := initialKey;
+  conn.Open;
+  query.Close;
+  //the sql query displayed in dbgrid
+  query.sql.Text := ('SELECT Salt FROM LoginInformation WHERE UserID = ' + UserID);
+  query.Open;
+  salt := query.FieldByName('Salt').AsString;
+  key := key + salt;
+  query.close;
+  query.clear;
+  conn.close;
 end;
 
 procedure TFormManager.ButtonConnectClick(Sender: TObject);
@@ -270,7 +288,6 @@ var
 begin
   //sets the initial key. This could change through the use of a salt which 
   //would be stored alongside the user's username and password
-  key := initialKey;
   setPlaintext;
   cipherString := encrypt;
   FormManager.EditOutputCiphertext.Caption := cipherString;
@@ -282,7 +299,6 @@ var
   DecryptArrayInt: dynamicArray;
   DecryptedString: string;
 begin
-  key := initialKey;
   //The inputted string is made into an array of hex values
   DecryptArrayString := stringToHex(EditCiphertext.Text);
   // This is then converted to an array of integers suitable for XOR

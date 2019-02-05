@@ -9,6 +9,7 @@ object FormManager: TFormManager
   ClientWidth = 650
   DesignTimePPI = 144
   OnCreate = FormCreate
+  OnShow = FormShow
   Position = poDesktopCenter
   Visible = False
   object PageControl1: TPageControl
