@@ -75,16 +75,22 @@ var
   salt : string;
 begin
   key := initialKey;
-  conn.Open;
-  query.Close;
-  //the sql query displayed in dbgrid
-  query.sql.Text := ('SELECT Salt FROM LoginInformation WHERE UserID = ' + UserID);
-  query.Open;
-  salt := query.FieldByName('Salt').AsString;
-  key := key + salt;
-  query.close;
-  query.clear;
-  conn.close;
+  try
+    conn.Open;
+    query.Close;
+    //The users unique salt is fetched from the databsae
+    query.sql.Text := ('SELECT Salt FROM LoginInformation WHERE UserID = ' + UserID);
+    query.Open;
+    //Extract string from query
+    salt := query.FieldByName('Salt').AsString;
+    //Append the salt to the key. This means only the user that encrypted the passwords can decrypt them
+    key := key + salt;
+    query.close;
+    query.clear;
+    conn.close;
+  except
+    ShowMessage('Unable to connect to database');
+  end;
 end;
 
 procedure TFormManager.ButtonConnectClick(Sender: TObject);
