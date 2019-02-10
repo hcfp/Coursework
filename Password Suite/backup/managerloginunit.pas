@@ -33,8 +33,9 @@ type
 
 var
   FormManagerLogin: TFormManagerLogin;
-  UserID, LastTimeLockedString: string;
+  UserID: string;
   attempts: integer;
+  TimeFirstCreated: TDateTime;
 
 implementation
 
@@ -75,20 +76,19 @@ end;
 
 procedure initialiseLog;
 var
-  TimeFirstCreated: TDateTime;
   Log: TextFile;
   dir : string;
 begin
   dir := ExtractFilePath(ParamStr(0));
   TimeFirstCreated := Now;
-  //try
+  try
     AssignFile(Log, dir + 'log.txt');
     rewrite(Log);
     writeln(Log, DateTimeToStr(TimeFirstCreated));
     CloseFile(Log);
-  //except
-    //ShowMessage('Unable to create log file');
-  //end;
+  except
+    ShowMessage('Unable to create log file');
+  end;
 end;
 //Clears login details for when login screen is accessed again
 procedure resetConnection;
@@ -220,7 +220,7 @@ end;
 
 procedure TFormManagerLogin.ButtonLoginClick(Sender: TObject);
 var
-  EnteredUsername, EnteredPassword, Password, SaltFromDB: string;
+  EnteredUsername, EnteredPassword, Password, SaltFromDB, LastTimeLockedString: string;
   log: TextFile;
   TimeFirstLocked: TDateTime;
 begin
@@ -238,6 +238,8 @@ begin
     begin
       readln(log, LastTimeLockedString);
     end;
+    if LastTimeLockedString =  DateTimeToStr TimeFirstCreated then
+      LastTimeLockedString := '01/01/1970 00:00:00'
   except
     ShowMessage('Unable to read from file');
   end;
@@ -246,7 +248,7 @@ begin
   if MilliSecondsBetween(StrToDateTime(LastTimeLockedString), Now) > 30000 then
   begin
     attempts := attempts + 1;
-    if attempts < 3 then
+    if attempts < 4 then
     begin
       try
         Query.SQL.Clear;
@@ -278,14 +280,14 @@ begin
     else
     begin
       //if it is the first time that the user has exceeded the max attemps
-      if attempts = 3 then
+      if attempts = 4 then
       begin
         //add the current time to the log file
         TimeFirstLocked := Now;
         try
           AssignFile(Log, 'log.txt');
           append(log);
-          writeln(log, TimeToStr(TimeFirstLocked));
+          writeln(log, DateTimeToStr(TimeFirstLocked));
           CloseFile(Log);
         except
           ShowMessage('Unable to read log');

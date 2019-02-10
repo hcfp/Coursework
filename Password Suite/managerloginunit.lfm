@@ -9,6 +9,7 @@ object FormManagerLogin: TFormManagerLogin
   ClientWidth = 250
   OnCreate = FormCreate
   Position = poDesktopCenter
+  LCLVersion = '2.0.0.3'
   object EditUsername: TLabeledEdit
     Left = 32
     Height = 23
