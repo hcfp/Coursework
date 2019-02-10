@@ -1,12 +1,12 @@
 object FormGen: TFormGen
   Left = 441
-  Height = 253
+  Height = 300
   Top = 118
-  Width = 300
+  Width = 330
   ActiveControl = PageControl1
   Caption = 'Generator'
-  ClientHeight = 253
-  ClientWidth = 300
+  ClientHeight = 300
+  ClientWidth = 330
   OnClose = FormClose
   Position = poDesktopCenter
   object PageControl1: TPageControl
@@ -24,9 +24,9 @@ object FormGen: TFormGen
       ClientWidth = 325
       ParentFont = False
       object ButtonGenWords: TButton
-        Left = 120
+        Left = 112
         Height = 25
-        Top = 194
+        Top = 224
         Width = 75
         Caption = 'Generate'
         OnClick = ButtonGenWordsClick
@@ -34,9 +34,9 @@ object FormGen: TFormGen
         TabOrder = 0
       end
       object EditOutputWords: TLabeledEdit
-        Left = 48
+        Left = 40
         Height = 23
-        Top = 160
+        Top = 192
         Width = 219
         EditLabel.Height = 15
         EditLabel.Width = 219
@@ -47,7 +47,7 @@ object FormGen: TFormGen
         TabOrder = 1
       end
       object SpinEditNumOfWords: TSpinEdit
-        Left = 133
+        Left = 124
         Height = 23
         Top = 64
         Width = 50
@@ -70,7 +70,7 @@ object FormGen: TFormGen
         TabOrder = 3
       end
       object LabelWords: TLabel
-        Left = 83
+        Left = 76
         Height = 15
         Top = 8
         Width = 147
@@ -79,9 +79,9 @@ object FormGen: TFormGen
         ParentFont = False
       end
       object EditDelimiter: TLabeledEdit
-        Left = 48
+        Left = 115
         Height = 23
-        Top = 96
+        Top = 152
         Width = 80
         EditLabel.Height = 15
         EditLabel.Width = 80
@@ -90,9 +90,9 @@ object FormGen: TFormGen
         TabOrder = 4
       end
       object LabelDefaultDelimiter: TLabel
-        Left = 32
+        Left = 35
         Height = 15
-        Top = 120
+        Top = 112
         Width = 229
         Caption = 'A delimiter of a single space is recomended'
         ParentColor = False

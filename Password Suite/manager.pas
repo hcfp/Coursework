@@ -26,6 +26,8 @@ type
     DBNavigator1: TDBNavigator;
     PageControl1: TPageControl;
     Conn: TSQLite3Connection;
+    TextEncryptHelp2: TStaticText;
+    TextEncryptHelp: TStaticText;
     TabSheetEncrypt: TTabSheet;
     Trans: TSQLTransaction;
     TabSheetManager: TTabSheet;
@@ -73,7 +75,7 @@ end;
 
 procedure TFormManager.FormShow(Sender: TObject);
 var
-  salt : string;
+  salt: string;
 begin
   key := initialKey;
   try
@@ -86,9 +88,9 @@ begin
     salt := query.FieldByName('Salt').AsString;
     //Append the salt to the key. This means only the user that encrypted the passwords can decrypt them
     key := key + salt;
-    query.close;
-    query.clear;
-    conn.close;
+    query.Close;
+    query.Clear;
+    conn.Close;
   except
     ShowMessage('Unable to connect to database');
   end;
@@ -192,9 +194,9 @@ begin
     S[i] := S[j];
     S[j] := temp;
     K := S[(S[i] + S[j]) mod 256];
-    key[i - 1] := K;            
-  end;                          
-  Result := key;                   
+    key[i - 1] := K;
+  end;
+  Result := key;
 end;
 
 procedure setPlaintext;

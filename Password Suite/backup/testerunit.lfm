@@ -1,12 +1,12 @@
 object FormTester: TFormTester
   Left = 472
-  Height = 333
+  Height = 300
   Top = 213
-  Width = 333
+  Width = 330
   ActiveControl = PageControl1
   Caption = 'Tester'
-  ClientHeight = 333
-  ClientWidth = 333
+  ClientHeight = 300
+  ClientWidth = 330
   OnClose = FormClose
   Position = poDesktopCenter
   object PageControl1: TPageControl
@@ -14,9 +14,9 @@ object FormTester: TFormTester
     Height = 333
     Top = 0
     Width = 333
-    ActivePage = TabSheetWordList
+    ActivePage = TabSheetRequirements
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object TabSheetWordList: TTabSheet
       Caption = 'Word List Test'
@@ -59,10 +59,10 @@ object FormTester: TFormTester
         ParentFont = False
       end
       object ButtonTestWords: TButton
-        Left = 117
-        Height = 17
+        Left = 122
+        Height = 25
         Top = 133
-        Width = 50
+        Width = 60
         Caption = 'Test'
         OnClick = ButtonTestWordsClick
         ParentFont = False
@@ -78,9 +78,9 @@ object FormTester: TFormTester
         Left = 53
         Height = 23
         Top = 64
-        Width = 177
+        Width = 194
         EditLabel.Height = 15
-        EditLabel.Width = 177
+        EditLabel.Width = 194
         EditLabel.Caption = 'Enter password to be tested'
         EditLabel.ParentColor = False
         EditLabel.ParentFont = False
@@ -90,7 +90,7 @@ object FormTester: TFormTester
       end
       object TextPassLength: TStaticText
         Left = 53
-        Height = 11
+        Height = 20
         Top = 108
         Width = 43
         Caption = 'Length'
@@ -98,26 +98,26 @@ object FormTester: TFormTester
         TabOrder = 1
       end
       object TextPassLower: TStaticText
-        Left = 120
-        Height = 11
+        Left = 109
+        Height = 20
         Top = 108
-        Width = 43
+        Width = 64
         Caption = 'Lowercase'
         ParentFont = False
         TabOrder = 2
       end
       object TextPassUpper: TStaticText
-        Left = 187
-        Height = 11
+        Left = 186
+        Height = 20
         Top = 108
-        Width = 43
+        Width = 61
         Caption = 'Uppercase'
         ParentFont = False
         TabOrder = 3
       end
       object TextPassDigits: TStaticText
-        Left = 53
-        Height = 11
+        Left = 56
+        Height = 19
         Top = 149
         Width = 43
         Caption = 'Digits'
@@ -125,25 +125,25 @@ object FormTester: TFormTester
         TabOrder = 4
       end
       object TextPassSpecial: TStaticText
-        Left = 187
-        Height = 11
+        Left = 195
+        Height = 19
         Top = 149
-        Width = 43
+        Width = 53
         Caption = 'Special'
         ParentFont = False
         TabOrder = 5
       end
       object TextPassFail: TStaticText
-        Left = 135
-        Height = 11
+        Left = 132
+        Height = 16
         Top = 176
-        Width = 17
+        Width = 25
         Caption = 'Fail'
         ParentFont = False
         TabOrder = 6
       end
       object ButtonGetTips: TButton
-        Left = 112
+        Left = 107
         Height = 25
         Top = 213
         Width = 75

@@ -65,7 +65,7 @@ const
 
 procedure TFormGen.FormClose(Sender: TObject);
 begin
-  EditOutputWords.Text := 'Test';
+  EditOutput.Text := '';
   SpinEditNumOfWords.Value := 0;
   FileNameEditWordList.FileName := '';
   FileNameEditWordList.Text := '';
@@ -260,7 +260,7 @@ end;
 procedure TFormGen.ButtonGenWordsClick(Sender: TObject);
 var
   words: TextFile;
-  temp, password, delimiter : string;
+  temp, password, delimiter: string;
   i, pos, numOfWords, j, lengthOfFile: integer;
 begin
   // Initializes the random number generator

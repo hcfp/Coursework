@@ -1,22 +1,21 @@
 object FormManagerLogin: TFormManagerLogin
   Left = 988
-  Height = 161
+  Height = 250
   Top = 336
-  Width = 187
+  Width = 250
   ActiveControl = EditUsername
   Caption = 'Login to Manager'
-  ClientHeight = 161
-  ClientWidth = 187
+  ClientHeight = 250
+  ClientWidth = 250
   OnCreate = FormCreate
   Position = poDesktopCenter
-  LCLVersion = '2.0.0.3'
   object EditUsername: TLabeledEdit
     Left = 32
-    Height = 33
-    Top = 47
-    Width = 91
-    EditLabel.Height = 25
-    EditLabel.Width = 137
+    Height = 23
+    Top = 72
+    Width = 148
+    EditLabel.Height = 15
+    EditLabel.Width = 148
     EditLabel.Caption = 'Username'
     EditLabel.ParentColor = False
     EditLabel.ParentFont = False
@@ -25,12 +24,12 @@ object FormManagerLogin: TFormManagerLogin
   end
   object EditPassword: TLabeledEdit
     Left = 32
-    Height = 33
-    Top = 75
-    Width = 81
+    Height = 23
+    Top = 120
+    Width = 148
     EchoMode = emPassword
-    EditLabel.Height = 25
-    EditLabel.Width = 121
+    EditLabel.Height = 15
+    EditLabel.Width = 148
     EditLabel.Caption = 'Password'
     EditLabel.ParentColor = False
     EditLabel.ParentFont = False
@@ -39,20 +38,20 @@ object FormManagerLogin: TFormManagerLogin
     TabOrder = 1
   end
   object ButtonLogin: TButton
-    Left = 85
-    Height = 16
-    Top = 101
-    Width = 33
+    Left = 120
+    Height = 25
+    Top = 152
+    Width = 60
     Caption = 'Login'
     OnClick = ButtonLoginClick
     ParentFont = False
     TabOrder = 2
   end
   object CheckBoxPassword: TCheckBox
-    Left = 117
-    Height = 29
-    Top = 75
-    Width = 155
+    Left = 56
+    Height = 19
+    Top = 192
+    Width = 102
     Caption = 'Show Password'
     OnChange = CheckBoxPasswordChange
     ParentFont = False
@@ -60,9 +59,9 @@ object FormManagerLogin: TFormManagerLogin
   end
   object ButtonNewUser: TButton
     Left = 32
-    Height = 16
-    Top = 101
-    Width = 38
+    Height = 25
+    Top = 152
+    Width = 60
     Caption = 'Add User'
     OnClick = ButtonNewUserClick
     ParentFont = False

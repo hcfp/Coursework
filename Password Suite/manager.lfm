@@ -1,36 +1,34 @@
 object FormManager: TFormManager
   Left = 302
-  Height = 350
+  Height = 300
   Top = 243
-  Width = 650
+  Width = 500
   ActiveControl = PageControl1
   Caption = 'Manager'
-  ClientHeight = 350
-  ClientWidth = 650
-  DesignTimePPI = 144
+  ClientHeight = 300
+  ClientWidth = 500
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poDesktopCenter
-  Visible = False
   object PageControl1: TPageControl
     Left = 0
-    Height = 350
+    Height = 300
     Top = 0
-    Width = 650
+    Width = 500
     ActivePage = TabSheetManager
     ParentFont = False
     TabIndex = 0
     TabOrder = 0
     object TabSheetManager: TTabSheet
       Caption = 'Password Manager'
-      ClientHeight = 312
-      ClientWidth = 642
+      ClientHeight = 272
+      ClientWidth = 492
       ParentFont = False
       object DBNavigator1: TDBNavigator
-        Left = 168
-        Height = 25
-        Top = 264
-        Width = 224
+        Left = 104
+        Height = 32
+        Top = 216
+        Width = 232
         BevelOuter = bvNone
         ChildSizing.EnlargeHorizontal = crsScaleChilds
         ChildSizing.EnlargeVertical = crsScaleChilds
@@ -38,28 +36,28 @@ object FormManager: TFormManager
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 100
-        ClientHeight = 25
-        ClientWidth = 224
+        ClientHeight = 32
+        ClientWidth = 232
         DataSource = Source
         Options = []
         ParentFont = False
         TabOrder = 0
       end
       object ButtonConnect: TButton
-        Left = 408
-        Height = 24
-        Top = 265
-        Width = 56
+        Left = 384
+        Height = 25
+        Top = 220
+        Width = 60
         Caption = 'Connect'
         OnClick = ButtonConnectClick
         ParentFont = False
         TabOrder = 1
       end
       object Grid: TDBGrid
-        Left = 64
-        Height = 192
-        Top = 64
-        Width = 512
+        Left = 16
+        Height = 152
+        Top = 56
+        Width = 448
         Color = clWindow
         Columns = <>
         DataSource = Source
@@ -69,22 +67,16 @@ object FormManager: TFormManager
     end
     object TabSheetEncrypt: TTabSheet
       Caption = 'Encryption'
-      ClientHeight = 322
-      ClientWidth = 642
+      ClientHeight = 272
+      ClientWidth = 492
       ParentFont = False
       object EditPlaintext: TLabeledEdit
-        Left = 216
+        Left = 16
         Height = 23
-        Top = 96
-        Width = 162
-        EditLabel.AnchorSideLeft.Control = EditPlaintext
-        EditLabel.AnchorSideRight.Control = EditPlaintext
-        EditLabel.AnchorSideRight.Side = asrBottom
-        EditLabel.AnchorSideBottom.Control = EditPlaintext
-        EditLabel.Left = 216
+        Top = 88
+        Width = 180
         EditLabel.Height = 15
-        EditLabel.Top = 78
-        EditLabel.Width = 162
+        EditLabel.Width = 180
         EditLabel.Caption = 'Plaintext Input'
         EditLabel.ParentColor = False
         EditLabel.ParentFont = False
@@ -92,18 +84,12 @@ object FormManager: TFormManager
         TabOrder = 0
       end
       object EditOutputCiphertext: TLabeledEdit
-        Left = 216
+        Left = 16
         Height = 23
-        Top = 152
-        Width = 162
-        EditLabel.AnchorSideLeft.Control = EditOutputCiphertext
-        EditLabel.AnchorSideRight.Control = EditOutputCiphertext
-        EditLabel.AnchorSideRight.Side = asrBottom
-        EditLabel.AnchorSideBottom.Control = EditOutputCiphertext
-        EditLabel.Left = 216
+        Top = 208
+        Width = 180
         EditLabel.Height = 15
-        EditLabel.Top = 134
-        EditLabel.Width = 162
+        EditLabel.Width = 180
         EditLabel.Caption = 'Ciphertext Output'
         EditLabel.ParentColor = False
         EditLabel.ParentFont = False
@@ -111,18 +97,12 @@ object FormManager: TFormManager
         TabOrder = 1
       end
       object EditCiphertext: TLabeledEdit
-        Left = 216
+        Left = 288
         Height = 23
-        Top = 200
-        Width = 162
-        EditLabel.AnchorSideLeft.Control = EditCiphertext
-        EditLabel.AnchorSideRight.Control = EditCiphertext
-        EditLabel.AnchorSideRight.Side = asrBottom
-        EditLabel.AnchorSideBottom.Control = EditCiphertext
-        EditLabel.Left = 216
+        Top = 88
+        Width = 180
         EditLabel.Height = 15
-        EditLabel.Top = 182
-        EditLabel.Width = 162
+        EditLabel.Width = 180
         EditLabel.Caption = 'Ciphertext Input'
         EditLabel.ParentColor = False
         EditLabel.ParentFont = False
@@ -130,18 +110,12 @@ object FormManager: TFormManager
         TabOrder = 2
       end
       object EditOutputPlaintext: TLabeledEdit
-        Left = 216
+        Left = 288
         Height = 23
-        Top = 256
-        Width = 162
-        EditLabel.AnchorSideLeft.Control = EditOutputPlaintext
-        EditLabel.AnchorSideRight.Control = EditOutputPlaintext
-        EditLabel.AnchorSideRight.Side = asrBottom
-        EditLabel.AnchorSideBottom.Control = EditOutputPlaintext
-        EditLabel.Left = 216
+        Top = 208
+        Width = 180
         EditLabel.Height = 15
-        EditLabel.Top = 238
-        EditLabel.Width = 162
+        EditLabel.Width = 180
         EditLabel.Caption = 'Plaintext Output'
         EditLabel.ParentColor = False
         EditLabel.ParentFont = False
@@ -149,24 +123,40 @@ object FormManager: TFormManager
         TabOrder = 3
       end
       object ButtonEncrypt: TButton
-        Left = 392
-        Height = 23
-        Top = 120
-        Width = 48
+        Left = 76
+        Height = 25
+        Top = 136
+        Width = 60
         Caption = 'Encrypt'
         OnClick = ButtonEncryptClick
         ParentFont = False
         TabOrder = 4
       end
       object ButtonDecrypt: TButton
-        Left = 392
-        Height = 23
-        Top = 224
-        Width = 48
+        Left = 348
+        Height = 25
+        Top = 136
+        Width = 60
         Caption = 'Decrypt'
         OnClick = ButtonDecryptClick
         ParentFont = False
         TabOrder = 5
+      end
+      object TextEncryptHelp: TStaticText
+        Left = 0
+        Height = 17
+        Top = 16
+        Width = 489
+        Caption = 'Use this the edit boxes on the left to encrypt password before entering then into the manager'
+        TabOrder = 6
+      end
+      object TextEncryptHelp2: TStaticText
+        Left = 64
+        Height = 17
+        Top = 48
+        Width = 360
+        Caption = 'Use the boxes on the right to decrypt passwords from the manager'
+        TabOrder = 7
       end
     end
   end
@@ -176,18 +166,18 @@ object FormManager: TFormManager
     DatabaseName = 'PasswordSuite.db'
     KeepConnection = False
     Transaction = Trans
-    left = 78
+    left = 52
     top = 32
   end
   object Trans: TSQLTransaction
     Active = False
     Database = Conn
-    left = 144
+    left = 96
     top = 32
   end
   object Source: TDataSource
     DataSet = Query
-    left = 216
+    left = 144
     top = 32
   end
   object Query: TSQLQuery
@@ -222,7 +212,7 @@ object FormManager: TFormManager
       'SELECT * FROM Manager'
     )
     Params = <>
-    left = 16
+    left = 11
     top = 32
   end
 end

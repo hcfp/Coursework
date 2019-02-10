@@ -75,27 +75,32 @@ end;
 
 procedure initialiseLog;
 var
-  TimeFirstCreated : TDateTime;
-  Log : TextFile;
+  TimeFirstCreated: TDateTime;
+  Log: TextFile;
+  dir : string;
 begin
-  TimeFirstCreated := Time;
-  try
-    AssignFile(Log, 'log.txt');
-    append(log);
-    writeln(log, TimeToStr(TimeFirstCreated));
+  dir := ExtractFilePath(ParamStr(0));
+  TimeFirstCreated := Now;
+  //try
+    AssignFile(Log, dir + 'log.txt');
+    rewrite(Log);
+    writeln(Log, DateTimeToStr(TimeFirstCreated));
     CloseFile(Log);
-  except
-    ShowMessage('Unable to create');
-  end;
+  //except
+    //ShowMessage('Unable to create log file');
+  //end;
 end;
-
 //Clears login details for when login screen is accessed again
 procedure resetConnection;
 begin
   //Close connection in the login form
-  FormManagerLogin.Conn.Close;
-  FormManagerLogin.Trans.EndTransaction;
-  FormManagerLogin.Query.Close;
+  try
+    FormManagerLogin.Conn.Close;
+    FormManagerLogin.Trans.EndTransaction;
+    FormManagerLogin.Query.Close;
+  except
+    ShowMessage('Could not close login connection');
+  end;
   //clear edits for next user
   FormManagerLogin.EditUsername.Text := '';
   FormManagerLogin.EditPassword.Text := '';
@@ -115,12 +120,14 @@ begin
     FormManager.Trans.EndTransaction;
     FormManager.Query.Close;
   except
-    ShowMessage('Could not close manager table');
+    ShowMessage('Could not close manager connection');
   end;
 end;
 
 procedure TFormManagerLogin.FormCreate(Sender: TObject);
 begin
+  if not FileExists('log.txt') then
+    initialiseLog;
   randomize;
   conn.Close; // Ensure the connection is closed at start start
   try
@@ -172,7 +179,7 @@ var
 begin
   username := EditUsername.Text;
   password := EditPassword.Text;
-  if (length(password) >= 8) and (username <> '')then
+  if (length(password) >= 8) and (username <> '') then
   begin
     Query.Close;
     Query.SQL.Text := 'SELECT Username FROM LoginInformation WHERE Username = ' +
@@ -192,7 +199,8 @@ begin
       //UserID value is null since it is an auto-incremented field
       try
         conn.ExecuteDirect(
-          'INSERT INTO LoginInformation (UserID, Username, Password, Salt) VALUES (NULL,' +
+          'INSERT INTO LoginInformation (UserID, Username, Password, Salt) VALUES (NULL,'
+          +
           username + ',' + password + ',' + generatedSalt + ');');
         trans.Commit;
         Conn.Close;
@@ -235,10 +243,10 @@ begin
   end;
   CloseFile(Log);
   //if it has been more than 30 seconds since the file was last locked
-  if MilliSecondsBetween(StrToTime(LastTimeLockedString), Time) > 30000 then
+  if MilliSecondsBetween(StrToDateTime(LastTimeLockedString), Now) > 30000 then
   begin
     attempts := attempts + 1;
-    if attempts < 3 then
+    if attempts < 4 then
     begin
       try
         Query.SQL.Clear;
@@ -270,10 +278,10 @@ begin
     else
     begin
       //if it is the first time that the user has exceeded the max attemps
-      if attempts = 3 then
+      if attempts = 4 then
       begin
         //add the current time to the log file
-        TimeFirstLocked := Time;
+        TimeFirstLocked := Now;
         try
           AssignFile(Log, 'log.txt');
           append(log);
@@ -288,17 +296,17 @@ begin
       if attempts > 3 then
       begin
         try
-        AssignFile(Log, 'log.txt');
-        reset(log);
-        while not EOF(log) do
-        begin
-          readln(log, LastTimeLockedString);
-        end;
-        CloseFile(Log);
+          AssignFile(Log, 'log.txt');
+          reset(log);
+          while not EOF(log) do
+          begin
+            readln(log, LastTimeLockedString);
+          end;
+          CloseFile(Log);
         except
           ShowMessage('Unable to read from log');
         end;
-        if MilliSecondsBetween(StrToTime(LastTimeLockedString), Time) > 30000 then
+        if MilliSecondsBetween(StrToDateTime(LastTimeLockedString), Now) > 30000 then
         begin
           ShowMessage('Login has been unlocked. Try again');
           attempts := 0;
