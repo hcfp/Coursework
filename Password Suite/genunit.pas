@@ -217,8 +217,12 @@ var
 begin
   // Go through the file incrementing the counter while there are lines
   // Remianing in the file
-  AssignFile(words, FormGen.FileNameEditWordList.FileName);
-  reset(words);
+  try
+    AssignFile(words, FormGen.FileNameEditWordList.FileName);
+    reset(words);
+  except
+    ShowMessage('Could not assign word list');
+  end;
   i := 0;
   while not EOF(words) do
   begin
@@ -238,7 +242,11 @@ begin
   // Initializes the random number generator
   // by giving a value to Randseed, calculated with the system clock
   randomize;
-  AssignFile(words, FileNameEditWordList.FileName);
+  try
+    AssignFile(words, FileNameEditWordList.FileName);
+  except
+    ShowMessage('Could not assign word list');
+  end;
   // Find the total number of lines in the file
   lengthOfFile := GetLines;
   reset(words);

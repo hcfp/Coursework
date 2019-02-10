@@ -206,8 +206,12 @@ var
   temp, searchItem, currentSearchItem: string;
   passwords: TextFile;
 begin
-  AssignFile(passwords, FileNameEditGetPass.FileName);
-  reset(passwords);
+  try
+    AssignFile(passwords, FileNameEditGetPass.FileName);
+    reset(passwords);
+  except
+    ShowMessage('Could not assign word list');
+  end;
 
   //increments i for each line in the file
   i := 1;
