@@ -16,6 +16,8 @@ type
     ButtonGenWords: TButton;
     ButtonGenRandom: TButton;
     FileNameEditWordList: TFileNameEdit;
+    LabelDefaultDelimiter: TLabel;
+    EditDelimiter: TLabeledEdit;
     LabelLength: TLabel;
     LabelRandom: TLabel;
     LabelWords: TLabel;
@@ -34,6 +36,7 @@ type
     TabSheetRandGen: TTabSheet;
     procedure ButtonGenRandomClick(Sender: TObject);
     procedure ButtonGenWordsClick(Sender: TObject);
+    procedure FormClose(Sender: TObject);
   private
 
   public
@@ -59,6 +62,19 @@ const
   alphaRange = 25;
   digitRange = 10;
   specialRange = 21;
+
+procedure TFormGen.FormClose(Sender: TObject);
+begin
+  EditOutputWords.Text := 'Test';
+  SpinEditNumOfWords.Value := 0;
+  FileNameEditWordList.FileName := '';
+  FileNameEditWordList.Text := '';
+  EditDelimiter.Text := '';
+  SpinEditLength.Value := 0;
+  SpinEditDigits.Value := 0;
+  SpinEditSpecial.Value := 0;
+  SpinEditCaps.Value := 0;
+end;
 
 function initialise: integer;
 var
@@ -217,8 +233,12 @@ var
 begin
   // Go through the file incrementing the counter while there are lines
   // Remianing in the file
-  AssignFile(words, FormGen.FileNameEditWordList.FileName);
-  reset(words);
+  try
+    AssignFile(words, FormGen.FileNameEditWordList.FileName);
+    reset(words);
+  except
+    ShowMessage('Could not assign word list');
+  end;
   i := 0;
   while not EOF(words) do
   begin
@@ -229,16 +249,28 @@ begin
   Result := i;
 end;
 
+function getDelimiter: string;
+var
+  delimiter: string;
+begin
+  delimiter := FormGen.EditDelimiter.Text;
+  Result := delimiter;
+end;
+
 procedure TFormGen.ButtonGenWordsClick(Sender: TObject);
 var
   words: TextFile;
-  temp, password: string;
+  temp, password, delimiter : string;
   i, pos, numOfWords, j, lengthOfFile: integer;
 begin
   // Initializes the random number generator
   // by giving a value to Randseed, calculated with the system clock
   randomize;
-  AssignFile(words, FileNameEditWordList.FileName);
+  try
+    AssignFile(words, FileNameEditWordList.FileName);
+  except
+    ShowMessage('Could not assign word list');
+  end;
   // Find the total number of lines in the file
   lengthOfFile := GetLines;
   reset(words);
@@ -257,14 +289,14 @@ begin
     end;
     // Ensure there isn't a space if it is the last word
     // Stops all passwords ending with a space
+    delimiter := getDelimiter;
     if i <> numOfWords then
-      password := password + temp + ' '
+      password := password + temp + delimiter
     else
       password := password + temp;
   end;
   EditOutputWords.Text := password;
 end;
-
 
 end.
 

@@ -13,7 +13,7 @@ type
   { TFormTester }
 
   TFormTester = class(TForm)
-    Button1: TButton;
+    ButtonGetTips: TButton;
     ButtonTestWords: TButton;
     EditPassword: TLabeledEdit;
     FileNameEditGetPass: TFileNameEdit;
@@ -28,9 +28,10 @@ type
     TextPassFail: TStaticText;
     TabSheetWordList: TTabSheet;
     TabSheetRequirements: TTabSheet;
-    procedure Button1Click(Sender: TObject);
+    procedure ButtonGetTipsClick(Sender: TObject);
     procedure ButtonTestWordsClick(Sender: TObject);
     procedure EditPasswordChange(Sender: TObject);
+    procedure FormClose(Sender: TObject);
   private
 
   public
@@ -46,12 +47,20 @@ implementation
 
 { TFormTester }
 
+procedure TFormTester.FormClose(Sender: TObject);
+begin
+  FileNameEditGetPass.Text := '';
+  EditGetPass.Text := '';
+  EditPassword.Text := '';
+end;
+
 procedure getTips;
 var
   password: string;
   re: TRegExpr;
   meetsLength, hasDigits, hasLower, hasUpper, hasSpecial: boolean;
 begin
+  password := FormTester.EditPassword.Text;
   re := TRegExpr.Create;
   meetsLength := false;
   hasDigits := false;
@@ -91,7 +100,7 @@ begin
     ' This vastly increases the number of passwords that have to be brute forced');
 end;
 
-procedure TFormTester.Button1Click(Sender: TObject);
+procedure TFormTester.ButtonGetTipsClick(Sender: TObject);
 begin
   getTips;
 end; 

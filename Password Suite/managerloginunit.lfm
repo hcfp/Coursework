@@ -1,29 +1,21 @@
 object FormManagerLogin: TFormManagerLogin
   Left = 988
-  Height = 242
+  Height = 161
   Top = 336
-  Width = 281
+  Width = 187
   ActiveControl = EditUsername
   Caption = 'Login to Manager'
-  ClientHeight = 242
-  ClientWidth = 281
-  DesignTimePPI = 144
+  ClientHeight = 161
+  ClientWidth = 187
   OnCreate = FormCreate
   Position = poDesktopCenter
-  LCLVersion = '1.8.4.0'
-  Visible = False
+  LCLVersion = '2.0.0.3'
   object EditUsername: TLabeledEdit
-    Left = 48
+    Left = 32
     Height = 33
-    Top = 71
-    Width = 137
-    EditLabel.AnchorSideLeft.Control = EditUsername
-    EditLabel.AnchorSideRight.Control = EditUsername
-    EditLabel.AnchorSideRight.Side = asrBottom
-    EditLabel.AnchorSideBottom.Control = EditUsername
-    EditLabel.Left = 48
+    Top = 47
+    Width = 91
     EditLabel.Height = 25
-    EditLabel.Top = 43
     EditLabel.Width = 137
     EditLabel.Caption = 'Username'
     EditLabel.ParentColor = False
@@ -32,18 +24,12 @@ object FormManagerLogin: TFormManagerLogin
     TabOrder = 0
   end
   object EditPassword: TLabeledEdit
-    Left = 48
+    Left = 32
     Height = 33
-    Top = 112
-    Width = 121
+    Top = 75
+    Width = 81
     EchoMode = emPassword
-    EditLabel.AnchorSideLeft.Control = EditPassword
-    EditLabel.AnchorSideRight.Control = EditPassword
-    EditLabel.AnchorSideRight.Side = asrBottom
-    EditLabel.AnchorSideBottom.Control = EditPassword
-    EditLabel.Left = 48
     EditLabel.Height = 25
-    EditLabel.Top = 84
     EditLabel.Width = 121
     EditLabel.Caption = 'Password'
     EditLabel.ParentColor = False
@@ -53,19 +39,19 @@ object FormManagerLogin: TFormManagerLogin
     TabOrder = 1
   end
   object ButtonLogin: TButton
-    Left = 128
-    Height = 24
-    Top = 152
-    Width = 49
+    Left = 85
+    Height = 16
+    Top = 101
+    Width = 33
     Caption = 'Login'
     OnClick = ButtonLoginClick
     ParentFont = False
     TabOrder = 2
   end
   object CheckBoxPassword: TCheckBox
-    Left = 176
+    Left = 117
     Height = 29
-    Top = 112
+    Top = 75
     Width = 155
     Caption = 'Show Password'
     OnChange = CheckBoxPasswordChange
@@ -73,10 +59,10 @@ object FormManagerLogin: TFormManagerLogin
     TabOrder = 3
   end
   object ButtonNewUser: TButton
-    Left = 48
-    Height = 24
-    Top = 152
-    Width = 57
+    Left = 32
+    Height = 16
+    Top = 101
+    Width = 38
     Caption = 'Add User'
     OnClick = ButtonNewUserClick
     ParentFont = False
@@ -89,21 +75,21 @@ object FormManagerLogin: TFormManagerLogin
     KeepConnection = False
     Transaction = Trans
     HostName = 'localhost'
-    left = 18
-    top = 7
+    left = 12
+    top = 5
   end
   object Query: TSQLQuery
     FieldDefs = <>
     Database = Conn
     Transaction = Trans
     Params = <>
-    left = 64
-    top = 7
+    left = 43
+    top = 5
   end
   object Trans: TSQLTransaction
     Active = False
     Database = Conn
-    left = 107
-    top = 7
+    left = 71
+    top = 5
   end
 end

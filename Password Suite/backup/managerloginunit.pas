@@ -35,7 +35,6 @@ var
   FormManagerLogin: TFormManagerLogin;
   UserID, LastTimeLockedString: string;
   attempts: integer;
-  TimeFirstLocked: TDateTime;
 
 implementation
 
@@ -72,6 +71,22 @@ begin
   for i := 0 to (random(5) + 5) do
     salt := salt + chr(random(93) + 33);
   Result := salt;
+end;
+
+procedure initialiseLog;
+var
+  TimeFirstCreated : TDateTime;
+  Log : TextFile
+begin
+  TimeFirstCreated := Time;
+  try
+    AssignFile(Log, 'log.txt');
+    append(log);
+    writeln(log, TimeToStr(TimeFirstCreated));
+    CloseFile(Log);
+  except
+    ShowMessage('Unable to create');
+  end;
 end;
 
 //Clears login details for when login screen is accessed again
@@ -157,7 +172,7 @@ var
 begin
   username := EditUsername.Text;
   password := EditPassword.Text;
-  if length(password) >= 8 and username <> '' then
+  if (length(password) >= 8) and (username <> '')then
   begin
     Query.Close;
     Query.SQL.Text := 'SELECT Username FROM LoginInformation WHERE Username = ' +
@@ -199,6 +214,7 @@ procedure TFormManagerLogin.ButtonLoginClick(Sender: TObject);
 var
   EnteredUsername, EnteredPassword, Password, SaltFromDB: string;
   log: TextFile;
+  TimeFirstLocked: TDateTime;
 begin
   query.Close;
   EnteredUsername := EditUsername.Text;
