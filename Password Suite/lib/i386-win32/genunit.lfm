@@ -9,6 +9,7 @@ object FormGen: TFormGen
   ClientWidth = 330
   OnClose = FormClose
   Position = poDesktopCenter
+  Visible = False
   object PageControl1: TPageControl
     Left = 0
     Height = 333
@@ -38,7 +39,13 @@ object FormGen: TFormGen
         Height = 23
         Top = 192
         Width = 219
+        EditLabel.AnchorSideLeft.Control = EditOutputWords
+        EditLabel.AnchorSideRight.Control = EditOutputWords
+        EditLabel.AnchorSideRight.Side = asrBottom
+        EditLabel.AnchorSideBottom.Control = EditOutputWords
+        EditLabel.Left = 45
         EditLabel.Height = 15
+        EditLabel.Top = 174
         EditLabel.Width = 219
         EditLabel.Caption = 'Generated password'
         EditLabel.ParentColor = False
@@ -83,7 +90,13 @@ object FormGen: TFormGen
         Height = 23
         Top = 152
         Width = 80
+        EditLabel.AnchorSideLeft.Control = EditDelimiter
+        EditLabel.AnchorSideRight.Control = EditDelimiter
+        EditLabel.AnchorSideRight.Side = asrBottom
+        EditLabel.AnchorSideBottom.Control = EditDelimiter
+        EditLabel.Left = 120
         EditLabel.Height = 15
+        EditLabel.Top = 134
         EditLabel.Width = 80
         EditLabel.Caption = 'Delimiter'
         EditLabel.ParentColor = False
@@ -188,7 +201,13 @@ object FormGen: TFormGen
         Height = 23
         Top = 139
         Width = 135
+        EditLabel.AnchorSideLeft.Control = EditOutput
+        EditLabel.AnchorSideRight.Control = EditOutput
+        EditLabel.AnchorSideRight.Side = asrBottom
+        EditLabel.AnchorSideBottom.Control = EditOutput
+        EditLabel.Left = 0
         EditLabel.Height = 15
+        EditLabel.Top = 0
         EditLabel.Width = 135
         EditLabel.Caption = 'Generated password'
         EditLabel.ParentColor = False

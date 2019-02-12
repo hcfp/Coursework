@@ -20,6 +20,7 @@ type
     LabelWordList: TLabel;
     EditGetPass: TLabeledEdit;
     PageControl1: TPageControl;
+    TextStrength: TStaticText;
     TextPassLength: TStaticText;
     TextPassLower: TStaticText;
     TextPassUpper: TStaticText;
@@ -204,6 +205,21 @@ begin
   begin
     TextPassFail.Caption := 'Fail';
     TextPassFail.Font.Color := clRed;
+  end;
+  if count < 3 then
+  begin
+    TextStrength.Caption := 'Weak';
+    TextStrength.Font.Color := clRed;
+  end;
+  if count = 3 then
+  begin
+    TextStrength.Caption := 'Fair';
+    TextStrength.Font.Color := $004080FF;
+  end;
+  if count > 3 then
+  begin
+    TextStrength.Caption := 'Strong';
+    TextStrength.Font.Color := clLime
   end;
   //reset to allow recalulation based on changes
   Count := 0;

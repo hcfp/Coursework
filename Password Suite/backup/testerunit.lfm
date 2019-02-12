@@ -9,6 +9,7 @@ object FormTester: TFormTester
   ClientWidth = 330
   OnClose = FormClose
   Position = poDesktopCenter
+  Visible = False
   object PageControl1: TPageControl
     Left = 0
     Height = 333
@@ -41,7 +42,13 @@ object FormTester: TFormTester
         Height = 23
         Top = 101
         Width = 283
+        EditLabel.AnchorSideLeft.Control = EditGetPass
+        EditLabel.AnchorSideRight.Control = EditGetPass
+        EditLabel.AnchorSideRight.Side = asrBottom
+        EditLabel.AnchorSideBottom.Control = EditGetPass
+        EditLabel.Left = 11
         EditLabel.Height = 15
+        EditLabel.Top = 83
         EditLabel.Width = 283
         EditLabel.Caption = 'Enter password to be tested'
         EditLabel.ParentColor = False
@@ -79,7 +86,13 @@ object FormTester: TFormTester
         Height = 23
         Top = 64
         Width = 194
+        EditLabel.AnchorSideLeft.Control = EditPassword
+        EditLabel.AnchorSideRight.Control = EditPassword
+        EditLabel.AnchorSideRight.Side = asrBottom
+        EditLabel.AnchorSideBottom.Control = EditPassword
+        EditLabel.Left = 53
         EditLabel.Height = 15
+        EditLabel.Top = 46
         EditLabel.Width = 194
         EditLabel.Caption = 'Enter password to be tested'
         EditLabel.ParentColor = False
@@ -134,7 +147,7 @@ object FormTester: TFormTester
         TabOrder = 5
       end
       object TextPassFail: TStaticText
-        Left = 132
+        Left = 88
         Height = 16
         Top = 176
         Width = 25
@@ -151,6 +164,15 @@ object FormTester: TFormTester
         OnClick = ButtonGetTipsClick
         ParentFont = False
         TabOrder = 7
+      end
+      object TextStrength: TStaticText
+        Left = 160
+        Height = 17
+        Top = 176
+        Width = 65
+        Caption = 'Weak'
+        ParentFont = False
+        TabOrder = 8
       end
     end
   end
