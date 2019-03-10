@@ -114,6 +114,7 @@ begin
   FormManager.ShowModal;
   //Shows the login form when the manager is exited
   FormManagerLogin.Show;
+  FormManager.PageControl1.ActivePageIndex := 0;
   //ensures all connections are close
   try
     FormManager.Conn.Close;
@@ -122,6 +123,14 @@ begin
   except
     ShowMessage('Could not close manager connection');
   end;
+end;
+
+function CreateDatabaseName : string;
+var
+  dir : string;
+begin
+  dir := ExtractFilePath(ParamStr(0));
+  Result := dir + 'PasswordSuite.db';
 end;
 
 procedure TFormManagerLogin.FormCreate(Sender: TObject);
@@ -133,6 +142,7 @@ begin
   try
     // Since we're making this database for the first time,
     // check whether the file already exists
+    //conn.DatabaseName := CreateDatabaseName;
     if not FileExists(conn.DatabaseName) then
     begin
       // Create the database and the tables
@@ -153,7 +163,7 @@ begin
         ShowMessage('Succesfully created database.');
       except
         //shows when the file is not created or not created as defined
-        ShowMessage('Unable to Create new Database');
+        ShowMessage('Unable to create new Database');
       end;
     end;
   except

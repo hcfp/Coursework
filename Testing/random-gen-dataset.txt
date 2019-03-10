@@ -1,0 +1,14 @@
+length	digits	caps	special
+8		2		1		2		//normal
+10		5		2		1
+15		1		5		5
+
+8		2		4		2		//boundary			
+10		5		5		0
+15		10		1		4
+
+0		10		10		10		//erroneous
+1		10		10		10
+50		50		50		50
+55		55		55		55
+100		100		100		100

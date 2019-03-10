@@ -1,0 +1,18 @@
+delimiter	length
+' '			2		//normal
+^			5
+£			2
+a			8
+
+			1		//boundary - no delimiter
+			55
+abc			1
+abc			1
+abc			3
+!"£			5
+&*)			55
+
+
+50 'a's		100		//erroneous
+' '			-1
+' '			-5

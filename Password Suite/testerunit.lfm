@@ -9,15 +9,14 @@ object FormTester: TFormTester
   ClientWidth = 330
   OnClose = FormClose
   Position = poDesktopCenter
-  Visible = False
   object PageControl1: TPageControl
     Left = 0
     Height = 333
     Top = 0
     Width = 333
-    ActivePage = TabSheetWordList
+    ActivePage = TabSheetRequirements
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object TabSheetWordList: TTabSheet
       Caption = 'Word List Test'
@@ -42,13 +41,7 @@ object FormTester: TFormTester
         Height = 23
         Top = 101
         Width = 283
-        EditLabel.AnchorSideLeft.Control = EditGetPass
-        EditLabel.AnchorSideRight.Control = EditGetPass
-        EditLabel.AnchorSideRight.Side = asrBottom
-        EditLabel.AnchorSideBottom.Control = EditGetPass
-        EditLabel.Left = 11
         EditLabel.Height = 15
-        EditLabel.Top = 83
         EditLabel.Width = 283
         EditLabel.Caption = 'Enter password to be tested'
         EditLabel.ParentColor = False
@@ -86,13 +79,7 @@ object FormTester: TFormTester
         Height = 23
         Top = 64
         Width = 194
-        EditLabel.AnchorSideLeft.Control = EditPassword
-        EditLabel.AnchorSideRight.Control = EditPassword
-        EditLabel.AnchorSideRight.Side = asrBottom
-        EditLabel.AnchorSideBottom.Control = EditPassword
-        EditLabel.Left = 53
         EditLabel.Height = 15
-        EditLabel.Top = 46
         EditLabel.Width = 194
         EditLabel.Caption = 'Enter password to be tested'
         EditLabel.ParentColor = False

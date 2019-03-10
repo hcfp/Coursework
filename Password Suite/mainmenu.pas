@@ -50,6 +50,7 @@ begin
   FormPasswordSuite.Hide;
   FormGen.ShowModal;
   FormPasswordSuite.Show;
+  FormGen.PageControl1.ActivePageIndex := 0;
 end;
 
 procedure TFormPasswordSuite.ButtonTesterClick(Sender: TObject);
@@ -57,6 +58,7 @@ begin
   FormPasswordSuite.Hide;
   FormTester.ShowModal;
   FormPasswordSuite.Show;
+  FormTester.PageControl1.ActivePageIndex := 0;
 end;
 
 end.

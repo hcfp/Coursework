@@ -1,0 +1,27 @@
+Normal
+
+Vy2TkChz
+copper23
+zajigalkin30
+llcoolj9
+Md3VT1Ans7Mnk
+p@ssw0rd2
+p@ssw0rd2NotInl1st
+P@$$w0rd:)
+
+Boundary
+
+1
+a
+!
+^
+@
+Md5		//short and present in one of the lists
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa //not present
+zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz  // 31 char and present
+
+Erroneous
+
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+	//blank
+£ ⅕ ⅙ ⅛ ⅔ ⅖ ⅗ ⅘ ⅜
