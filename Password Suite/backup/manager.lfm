@@ -147,7 +147,7 @@ object FormManager: TFormManager
         Height = 17
         Top = 16
         Width = 473
-        Caption = 'Use the edit boxes on the left to encrypt password before entering then into the manager'
+        Caption = 'Use the edit boxes on the left to encrypt password before entering them into the manager'
         TabOrder = 6
       end
       object TextEncryptHelp2: TStaticText
