@@ -14,9 +14,9 @@ object FormTester: TFormTester
     Height = 333
     Top = 0
     Width = 333
-    ActivePage = TabSheetRequirements
+    ActivePage = TabSheetWordList
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object TabSheetWordList: TTabSheet
       Caption = 'Word List Test'
