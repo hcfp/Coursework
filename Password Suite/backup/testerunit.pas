@@ -41,6 +41,7 @@ type
 
 var
   FormTester: TFormTester;
+  searchArray: array of string;
 
 implementation
 
@@ -90,9 +91,9 @@ begin
 
   if not (meetsLength) then
     ShowMessage(
-      'It is recomended that passwords are at least 8 characters long. This makes it more difficult to brute force passwords.');
+      'It is recommended that passwords are at least 8 characters long. This makes it more difficult to brute force passwords.');
   if not (hasDigits) then
-    ShowMessage('Passwords shoud have digits to increase the number of possible passwords in a fixed length');
+    ShowMessage('Passwords should have digits to increase the number of possible passwords in a fixed length');
   if not (hasLower) then
     ShowMessage('All passwords should include lowercase letters');
   if not (hasUpper) then
@@ -225,12 +226,30 @@ begin
   Count := 0;
 end;
 
+procedure BinarySearch(searchItem : string; low : integer; high : integer);
+var
+	mid : integer;
+  currentSearchItem : string;
+begin
+	if low > high then
+		ShowMessage(searchItem + ' Not found')
+	else
+	begin
+    mid := (low + high) DIV 2;
+		currentSearchItem := lowercase(searchArray[mid]);
+		if currentSearchItem = searchItem then
+			writeln('Found ' + searchItem)
+		else if currentSearchItem < searchItem then
+			BinarySearch(searchItem, mid + 1, high)
+		else
+			BinarySearch(searchItem, low, mid - 1);
+	end;
+end;
+
 procedure TFormTester.ButtonTestWordsClick(Sender: TObject);
 var
-  searchArray: array of string;
-  i, high, low, mid, maxLength: integer;
-  found, exists: boolean;
-  temp, searchItem, currentSearchItem: string;
+  i, high, low, maxLength: integer;
+  temp, searchItem: string;
   passwords: TextFile;
 begin
   try
@@ -253,9 +272,9 @@ begin
   end;
   //corrects changes required for counting length and array indexing
   maxLength := i - 2;
+  ShowMessage(IntToStr(maxLength));
   //closes passwords file to minimise memory use
   closeFile(passwords);
-
   searchItem := EditGetPass.Text;
   //converts to lowercase to lead to more matches
   searchItem := lowercase(searchItem);
@@ -263,33 +282,7 @@ begin
   which causes problems with binary search}
   high := maxLength;
   low := 0;
-  found := False;
-  //initially assume that the item exists
-  exists := True;
-  //the loop will only terminate if the item is found or does not exist
-  while not (found) and exists do
-  begin
-    //Item has been searched for and could not be found
-    if high < low then
-    begin
-      ShowMessage(searchItem + ' Not found');
-      exists := False;
-    end;
-    //jump to middle
-    mid := low + (high - low) div 2;
-    currentSearchItem := lowercase(searchArray[mid]);
-    //when the guess is less than the required, the search is moved down
-    if currentSearchItem < searchItem then
-      low := mid + 1;
-    //when greater, search is moved up
-    if currentSearchItem > searchItem then
-      high := mid - 1;
-    if currentSearchItem = searchItem then
-    begin
-      ShowMessage('Found ' + searchItem);
-      found := True;
-    end;
-  end;
+  BinarySearch(searchArray, searchItem, low, high);
 end;
 
 end.

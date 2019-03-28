@@ -41,6 +41,7 @@ type
 
 var
   FormTester: TFormTester;
+  searchArray: array of string;
 
 implementation
 
@@ -225,12 +226,30 @@ begin
   Count := 0;
 end;
 
+procedure BinarySearch(searchItem : string; low : integer; high : integer);
+var
+	mid : integer;
+  currentSearchItem : string;
+begin
+	if low > high then
+		ShowMessage(searchItem + ' Not found')
+	else
+	begin
+    mid := (low + high) DIV 2;
+		currentSearchItem := lowercase(searchArray[mid]);
+		if currentSearchItem = searchItem then
+			ShowMessage('Found ' + searchItem)
+		else if currentSearchItem < searchItem then
+			BinarySearch(searchItem, mid + 1, high)
+		else
+			BinarySearch(searchItem, low, mid - 1);
+	end;
+end;
+
 procedure TFormTester.ButtonTestWordsClick(Sender: TObject);
 var
-  searchArray: array of string;
-  i, high, low, mid, maxLength: integer;
-  found, exists: boolean;
-  temp, searchItem, currentSearchItem: string;
+  i, high, low, maxLength: integer;
+  temp, searchItem: string;
   passwords: TextFile;
 begin
   try
@@ -255,7 +274,6 @@ begin
   maxLength := i - 2;
   //closes passwords file to minimise memory use
   closeFile(passwords);
-
   searchItem := EditGetPass.Text;
   //converts to lowercase to lead to more matches
   searchItem := lowercase(searchItem);
@@ -263,33 +281,7 @@ begin
   which causes problems with binary search}
   high := maxLength;
   low := 0;
-  found := False;
-  //initially assume that the item exists
-  exists := True;
-  //the loop will only terminate if the item is found or does not exist
-  while not (found) and exists do
-  begin
-    //Item has been searched for and could not be found
-    if high < low then
-    begin
-      ShowMessage(searchItem + ' Not found');
-      exists := False;
-    end;
-    //jump to middle
-    mid := low + (high - low) div 2;
-    currentSearchItem := lowercase(searchArray[mid]);
-    //when the guess is less than the required, the search is moved down
-    if currentSearchItem < searchItem then
-      low := mid + 1;
-    //when greater, search is moved up
-    if currentSearchItem > searchItem then
-      high := mid - 1;
-    if currentSearchItem = searchItem then
-    begin
-      ShowMessage('Found ' + searchItem);
-      found := True;
-    end;
-  end;
+  BinarySearch(searchItem, low, high);
 end;
 
 end.
