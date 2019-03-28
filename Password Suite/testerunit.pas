@@ -90,9 +90,9 @@ begin
 
   if not (meetsLength) then
     ShowMessage(
-      'It is recomended that passwords are at least 8 characters long. This makes it more difficult to brute force passwords.');
+      'It is recommended that passwords are at least 8 characters long. This makes it more difficult to brute force passwords.');
   if not (hasDigits) then
-    ShowMessage('Passwords shoud have digits to increase the number of possible passwords in a fixed length');
+    ShowMessage('Passwords should have digits to increase the number of possible passwords in a fixed length');
   if not (hasLower) then
     ShowMessage('All passwords should include lowercase letters');
   if not (hasUpper) then
